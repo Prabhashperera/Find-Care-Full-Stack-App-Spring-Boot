@@ -14,7 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
-    @PostMapping
+    @PostMapping("login")
+    public String userLogin(@RequestBody User user) {
+        boolean isExist = authenticationService.loginUser(user);
+        if (isExist) {
+            return "Login successful";
+        }
+        return "Login failed";
+    }
+
+    @PostMapping("signup")
     public String userRegister(@RequestBody User user) {
         User savedUser = authenticationService.saveUser(user);
         return savedUser.toString();
