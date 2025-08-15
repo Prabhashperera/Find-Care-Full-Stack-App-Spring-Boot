@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtil { // Helper class for JWT operations
-    private final String SECRET_KEY = "mjjjjjjjjjjjjjjjjjjjjjjjjjjjjjecret"; // Key for signing and verifying tokens
+    private final String SECRET_KEY = "TPTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"; // Key for signing and verifying tokens
 
     public String generateToken(String username) { // Create a new token
         return Jwts.builder() // Start building

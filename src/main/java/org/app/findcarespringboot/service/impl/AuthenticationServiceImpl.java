@@ -15,7 +15,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User saveUser(User user) {
-        return userRepo.save(user);
+        boolean isExist = userRepo.existsUserByUsername(user.getUsername());
+        if (!isExist) {
+            return userRepo.save(user);
+        }
+        return null;
     }
 
     @Override
