@@ -22,11 +22,11 @@ public class AuthenticationController {
         if (isExist) {
             String token = jwtUtil.generateToken(user.getUsername());
             return ResponseEntity.ok(
-                    new ApiResponseDto("200", "Login Success", token) //Standard Api Response
+                    new ApiResponseDto(200, "Login Success", token) //Standard Api Response
             );
         }
         return ResponseEntity.status(401).body(
-                new ApiResponseDto("401", "Invalid credentials", null)
+                new ApiResponseDto(401, "Invalid credentials", null)
         );
     }
 
@@ -35,11 +35,11 @@ public class AuthenticationController {
         User savedUser = authenticationService.saveUser(user);
         if (savedUser != null) {
             return ResponseEntity.ok(
-                    new ApiResponseDto("200", "Register Success", savedUser)
+                    new ApiResponseDto(200, "Register Success", savedUser)
             );
         }
         return ResponseEntity.status(400).body(
-                new ApiResponseDto("400", "Registration failed", null)
+                new ApiResponseDto(400, "Registration failed", null)
         );
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Data
 public class ApiResponseDto {
-    private String status;
+    private int status;
     private String message;
     private Object data;
 }

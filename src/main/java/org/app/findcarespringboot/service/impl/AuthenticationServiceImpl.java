@@ -2,6 +2,7 @@ package org.app.findcarespringboot.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.app.findcarespringboot.entity.User;
+import org.app.findcarespringboot.exception.DataAlreadyExistsException;
 import org.app.findcarespringboot.repo.UserRepo;
 import org.app.findcarespringboot.service.AuthenticationService;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public User saveUser(User user) {
         boolean isExist = userRepo.existsUserByUsername(user.getUsername());
-        if (!isExist) {
-            return userRepo.save(user);
+        if (isExist) {
+            throw new DataAlreadyExistsException("User with username " + user.getUsername() + " already exists");
         }
-        return null;
+        return userRepo.save(user);
     }
 
     @Override
