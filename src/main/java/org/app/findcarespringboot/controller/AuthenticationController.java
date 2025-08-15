@@ -1,9 +1,11 @@
 package org.app.findcarespringboot.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.app.findcarespringboot.dto.response.ApiResponseDto;
 import org.app.findcarespringboot.entity.User;
 import org.app.findcarespringboot.service.AuthenticationService;
 import org.app.findcarespringboot.util.JwtUtil;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,20 +17,29 @@ public class AuthenticationController {
     private final JwtUtil jwtUtil;
 
     @PostMapping("login")
-    public String userLogin(@RequestBody User user) {
+    public ResponseEntity<ApiResponseDto> userLogin(@RequestBody User user) {
         boolean isExist = authenticationService.loginUser(user);
         if (isExist) {
-            return jwtUtil.generateToken(user.getUsername());
+            String token = jwtUtil.generateToken(user.getUsername());
+            return ResponseEntity.ok(
+                    new ApiResponseDto("200", "Login Success", token) //Standard Api Response
+            );
         }
-        return "Login failed";
+        return ResponseEntity.status(401).body(
+                new ApiResponseDto("401", "Invalid credentials", null)
+        );
     }
 
     @PostMapping("signup")
-    public String userRegister(@RequestBody User user) {
+    public ResponseEntity<ApiResponseDto> userRegister(@RequestBody User user) {
         User savedUser = authenticationService.saveUser(user);
         if (savedUser != null) {
-            return "User registered successfully";
+            return ResponseEntity.ok(
+                    new ApiResponseDto("200", "Register Success", savedUser)
+            );
         }
-        return "User not registered";
+        return ResponseEntity.status(400).body(
+                new ApiResponseDto("400", "Registration failed", null)
+        );
     }
 }
