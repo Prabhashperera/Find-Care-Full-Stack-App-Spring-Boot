@@ -20,9 +20,9 @@ public class AuthenticationController {
 
     @PostMapping("signup")
     public ResponseEntity<ApiResponseDto> userRegister(@RequestBody User user) {
-        User toSave = new User();
+        User toSave = new User(); //new Object for Hashed Password and Plain Username
         toSave.setUsername(user.getUsername());
-        toSave.setPassword(passwordEncoder.encode(user.getPassword()));
+        toSave.setPassword(passwordEncoder.encode(user.getPassword())); //Password Converting to the hashed Version
         User savedUser = authenticationService.saveUser(toSave);
         if (savedUser != null) {
             return ResponseEntity.ok(
@@ -38,7 +38,7 @@ public class AuthenticationController {
     public ResponseEntity<ApiResponseDto> userLogin(@RequestBody User user) {
         boolean isExist = authenticationService.loginUser(user);
         if (isExist) {
-            String token = jwtUtil.generateToken(user.getUsername());
+            String token = jwtUtil.generateToken(user.getUsername()); //Generating JWT Token
             return ResponseEntity.ok(
                     new ApiResponseDto(200, "Login Success", token) //Standard Api Response
             );
