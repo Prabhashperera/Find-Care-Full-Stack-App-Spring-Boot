@@ -39,7 +39,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (foundUser != null) {
             boolean matches = passwordEncoder.matches(user.getPassword(), foundUser.getPassword());
             if (matches) {
-                return jwtUtil.generateToken(user.getUsername()); //Generating JWT Token
+                return jwtUtil.generateToken(foundUser.getUsername()); //Generating JWT Token
             }
         }
         throw new BadCredentialsException("Invalid username or password");
