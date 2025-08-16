@@ -5,14 +5,18 @@ import org.app.findcarespringboot.entity.User;
 import org.app.findcarespringboot.exception.DataAlreadyExistsException;
 import org.app.findcarespringboot.repo.UserRepo;
 import org.app.findcarespringboot.service.AuthenticationService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUser(User user) {
@@ -25,6 +29,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public boolean loginUser(User user) {
-        return userRepo.existsUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+        User foundUser = userRepo.findByUsername(user.getUsername());
+        if (foundUser != null) {
+            return passwordEncoder.matches(user.getPassword(), foundUser.getPassword());
+        }
+        return false;
     }
 }

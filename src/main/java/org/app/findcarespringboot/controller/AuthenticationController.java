@@ -6,6 +6,7 @@ import org.app.findcarespringboot.entity.User;
 import org.app.findcarespringboot.service.AuthenticationService;
 import org.app.findcarespringboot.util.JwtUtil;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,23 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
+
+    @PostMapping("signup")
+    public ResponseEntity<ApiResponseDto> userRegister(@RequestBody User user) {
+        User toSave = new User();
+        toSave.setUsername(user.getUsername());
+        toSave.setPassword(passwordEncoder.encode(user.getPassword()));
+        User savedUser = authenticationService.saveUser(toSave);
+        if (savedUser != null) {
+            return ResponseEntity.ok(
+                    new ApiResponseDto(200, "Register Success", savedUser)
+            );
+        }
+        return ResponseEntity.status(400).body(
+                new ApiResponseDto(400, "Registration failed", null)
+        );
+    }
 
     @PostMapping("login")
     public ResponseEntity<ApiResponseDto> userLogin(@RequestBody User user) {
@@ -27,19 +45,6 @@ public class AuthenticationController {
         }
         return ResponseEntity.status(401).body(
                 new ApiResponseDto(401, "Invalid credentials", null)
-        );
-    }
-
-    @PostMapping("signup")
-    public ResponseEntity<ApiResponseDto> userRegister(@RequestBody User user) {
-        User savedUser = authenticationService.saveUser(user);
-        if (savedUser != null) {
-            return ResponseEntity.ok(
-                    new ApiResponseDto(200, "Register Success", savedUser)
-            );
-        }
-        return ResponseEntity.status(400).body(
-                new ApiResponseDto(400, "Registration failed", null)
         );
     }
 }
