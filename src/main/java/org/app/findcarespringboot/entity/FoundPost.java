@@ -31,7 +31,6 @@ public class FoundPost {
 
     private String finderName;
     private String contactNumber;
-    private String email;
 
     private String postDate;
     private String status;
