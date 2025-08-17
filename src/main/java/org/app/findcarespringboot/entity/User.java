@@ -20,4 +20,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<FoundPost> foundPosts;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
