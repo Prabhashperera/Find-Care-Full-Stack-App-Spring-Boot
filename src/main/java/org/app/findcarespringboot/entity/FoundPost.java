@@ -30,6 +30,7 @@ public class FoundPost {
     private String email;
 
     private String postDate;
+    private String status;
     private String mobileNumber;
     @ManyToOne
     private User user;
