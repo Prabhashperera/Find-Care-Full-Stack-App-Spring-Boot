@@ -1,22 +1,18 @@
-package org.app.findcarespringboot.entity;
+package org.app.findcarespringboot.dto;
+
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.app.findcarespringboot.entity.User;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-public class FoundPost {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FoundPostDto {
     private int postID;
-
-    @ManyToOne
     private User user;
-
 
     private String postDescription;
     private String petType;   // Dog, Cat, etc.
