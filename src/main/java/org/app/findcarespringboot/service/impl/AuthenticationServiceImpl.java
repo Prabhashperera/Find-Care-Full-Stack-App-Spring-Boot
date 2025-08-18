@@ -44,4 +44,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         throw new BadCredentialsException("Invalid username or password");
     }
+
+    public User findById(String id) {
+        return userRepo.findById(String.valueOf(id)).orElse(null);
+    }
 }

@@ -1,9 +1,8 @@
 package org.app.findcarespringboot.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.app.findcarespringboot.dto.UserDto;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,8 +13,8 @@ public class FoundPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int postID;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private User user;
 
 
     private String postDescription;
@@ -35,4 +34,21 @@ public class FoundPost {
     private String postDate;
     private String status;
     private String mobileNumber;
+
+    public FoundPost(String postDescription, String petType, String breed, String color, String gender, String photoUrl, String district, String city, String landmark, String finderName, String contactNumber, String postDate, String status, String mobileNumber) {
+        this.postDescription = postDescription;
+        this.petType = petType;
+        this.breed = breed;
+        this.color = color;
+        this.gender = gender;
+        this.photoUrl = photoUrl;
+        this.district = district;
+        this.city = city;
+        this.landmark = landmark;
+        this.finderName = finderName;
+        this.contactNumber = contactNumber;
+        this.postDate = postDate;
+        this.status = status;
+        this.mobileNumber = mobileNumber;
+    }
 }
