@@ -2,6 +2,8 @@ package org.app.findcarespringboot.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.app.findcarespringboot.entity.FoundPost;
+import org.app.findcarespringboot.exception.DataNotFoundException;
+import org.app.findcarespringboot.exception.InternalServerErrorException;
 import org.app.findcarespringboot.repo.FoundPostRepo;
 import org.app.findcarespringboot.repo.UserRepo;
 import org.app.findcarespringboot.service.FoundPostService;
@@ -22,8 +24,7 @@ public class FoundPostServiceImpl implements FoundPostService {
         try {
             return foundPostRepo.save(foundPost);
         } catch (Exception e) {
-            System.err.println("Failed to save FoundPost: " + e.getMessage());
-            return null; // or throw a custom exception
+            throw new InternalServerErrorException("Error saving found post");
         }
     }
 
@@ -36,6 +37,7 @@ public class FoundPostServiceImpl implements FoundPostService {
         throw new NullPointerException("Post not found");
     }
 
+//    Customer Method for Find the public id from exist uploaded url
     public String extractPublicIdFromCloudinary(String url) {
         String path = url.substring(url.indexOf("/upload/") + 8); // remove prefix
         if (path.contains("/v")) {

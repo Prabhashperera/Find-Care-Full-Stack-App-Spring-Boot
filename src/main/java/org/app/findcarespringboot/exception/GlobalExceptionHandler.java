@@ -28,7 +28,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponseDto> dataNotFoundException(DataNotFoundException e) {
         return new ResponseEntity<>(
                 new ApiResponseDto(409 , e.getMessage(), null)
-                , HttpStatus.CONFLICT
+                , HttpStatus.NOT_FOUND
+        );
+    }
+
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ResponseEntity<ApiResponseDto> internalServerErrorException(InternalServerErrorException e) {
+        return new ResponseEntity<>(
+                new ApiResponseDto(500 , e.getMessage(), null)
+                , HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
 }
