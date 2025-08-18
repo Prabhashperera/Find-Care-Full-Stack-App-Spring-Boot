@@ -33,9 +33,8 @@ public class FoundPost {
 
     private String postDate;
     private String status;
-    private String mobileNumber;
 
-    public FoundPost(User user, String postDescription, String petType, String breed, String color, String gender, String photoUrl, String district, String city, String landmark, String finderName, String contactNumber, String postDate, String status, String mobileNumber) {
+    public FoundPost(User user, String postDescription, String petType, String breed, String color, String gender, String photoUrl, String district, String city, String landmark, String finderName, String contactNumber, String postDate, String status) {
         this.user = user;
         this.postDescription = postDescription;
         this.petType = petType;
@@ -50,6 +49,5 @@ public class FoundPost {
         this.contactNumber = contactNumber;
         this.postDate = postDate;
         this.status = status;
-        this.mobileNumber = mobileNumber;
     }
 }
