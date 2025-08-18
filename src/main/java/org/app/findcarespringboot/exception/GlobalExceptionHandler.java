@@ -23,4 +23,12 @@ public class GlobalExceptionHandler {
                 HttpStatus.CONFLICT
         );
     }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<ApiResponseDto> dataNotFoundException(DataNotFoundException e) {
+        return new ResponseEntity<>(
+                new ApiResponseDto(409 , e.getMessage(), null)
+                , HttpStatus.CONFLICT
+        );
+    }
 }

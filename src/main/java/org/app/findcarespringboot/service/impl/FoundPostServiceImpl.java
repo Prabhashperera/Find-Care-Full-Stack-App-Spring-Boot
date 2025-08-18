@@ -30,7 +30,10 @@ public class FoundPostServiceImpl implements FoundPostService {
     @Override
     public FoundPost findPostById(int postID) {
         List<FoundPost> foundPostByPostID = foundPostRepo.getFoundPostByPostID(postID);
-        return foundPostByPostID.get(0);
+        if (!foundPostByPostID.isEmpty()) {
+            return foundPostByPostID.get(0);
+        }
+        throw new NullPointerException("Post not found");
     }
 
     public String extractPublicIdFromCloudinary(String url) {

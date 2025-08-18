@@ -74,37 +74,32 @@ public class FoundController {
         System.out.println("Reach Controller");
         ObjectMapper mapper = new ObjectMapper();
         FoundPostDto foundPostDto = mapper.readValue(dto, FoundPostDto.class);
-        System.out.println("Reach Object Mapper");
 
         FoundPost existPost = foundPostService.findPostById(foundPostDto.postID());
 
         String publicIdFromCloudinary = foundPostService.extractPublicIdFromCloudinary(existPost.getPhotoUrl());
         Map updatedPhoto = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
                 "public_id", publicIdFromCloudinary,  // reuse old public_id
-                "overwrite", true
+                "overwrite", true //overwrite the old link
         ));
-        System.out.println("Done Cloudinary");
 
         String updatedUrl = updatedPhoto.get("secure_url").toString();
 
-        if (existPost != null) {
-            existPost.setPostDescription(foundPostDto.postDescription());
-            existPost.setPetType(foundPostDto.petType());
-            existPost.setBreed(foundPostDto.breed());
-            existPost.setColor(foundPostDto.color());
-            existPost.setGender(foundPostDto.gender());
-            existPost.setPhotoUrl(updatedUrl);
-            existPost.setDistrict(foundPostDto.district());
-            existPost.setCity(foundPostDto.city());
-            existPost.setLandmark(foundPostDto.landmark());
-            existPost.setFinderName(foundPostDto.finderName());
-            existPost.setContactNumber(foundPostDto.contactNumber());
-            existPost.setPostDate(foundPostDto.postDate());
-            existPost.setStatus(foundPostDto.status());
-            foundPostService.save(existPost);
-            return ResponseEntity.ok(new ApiResponseDto(200, "Update Success", updatedUrl));
-        }
-        return ResponseEntity.ok(new ApiResponseDto(500, "Internal Server Error", null));
+        existPost.setPostDescription(foundPostDto.postDescription());
+        existPost.setPetType(foundPostDto.petType());
+        existPost.setBreed(foundPostDto.breed());
+        existPost.setColor(foundPostDto.color());
+        existPost.setGender(foundPostDto.gender());
+        existPost.setPhotoUrl(updatedUrl);
+        existPost.setDistrict(foundPostDto.district());
+        existPost.setCity(foundPostDto.city());
+        existPost.setLandmark(foundPostDto.landmark());
+        existPost.setFinderName(foundPostDto.finderName());
+        existPost.setContactNumber(foundPostDto.contactNumber());
+        existPost.setPostDate(foundPostDto.postDate());
+        existPost.setStatus(foundPostDto.status());
+        foundPostService.save(existPost);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Update Success", updatedUrl));
 
     }
 }
