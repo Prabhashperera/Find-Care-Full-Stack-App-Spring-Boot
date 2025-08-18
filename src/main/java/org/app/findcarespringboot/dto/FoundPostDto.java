@@ -2,6 +2,7 @@ package org.app.findcarespringboot.dto;
 
 public record FoundPostDto(
         int postID,
+        String user,
         String postDescription,
         String petType,
         String breed,

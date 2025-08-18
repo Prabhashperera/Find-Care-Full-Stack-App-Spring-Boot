@@ -13,8 +13,8 @@ public class FoundPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int postID;
 
-//    @ManyToOne
-//    private User user;
+    @ManyToOne
+    private User user;
 
 
     private String postDescription;
@@ -35,7 +35,8 @@ public class FoundPost {
     private String status;
     private String mobileNumber;
 
-    public FoundPost(String postDescription, String petType, String breed, String color, String gender, String photoUrl, String district, String city, String landmark, String finderName, String contactNumber, String postDate, String status, String mobileNumber) {
+    public FoundPost(User user, String postDescription, String petType, String breed, String color, String gender, String photoUrl, String district, String city, String landmark, String finderName, String contactNumber, String postDate, String status, String mobileNumber) {
+        this.user = user;
         this.postDescription = postDescription;
         this.petType = petType;
         this.breed = breed;

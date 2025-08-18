@@ -25,6 +25,7 @@ import java.util.Map;
 public class FoundController {
     private final FoundPostService foundPostService;
     private final Cloudinary cloudinary;
+    private final AuthenticationService authenticationService;
 
     @PostMapping(path = "save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponseDto> savePost(@RequestPart("dto") String dto, @RequestPart("file") MultipartFile file) throws IOException {
@@ -32,17 +33,20 @@ public class FoundController {
 
         ObjectMapper mapper = new ObjectMapper();
         FoundPostDto foundPostDto = mapper.readValue(dto, FoundPostDto.class);
+        User user = authenticationService.findById(foundPostDto.user());
 
-        try {
-            Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            photoUrl = (String) uploadResult.get("secure_url");
-            System.out.println("Photo URL: " + photoUrl);
-        } catch (IOException e) {
-            System.err.println("Upload failed: " + e.getMessage());
-            return ResponseEntity.ok(new ApiResponseDto(500, "Upload failed: " + e.getMessage(), null));
+        if (user == null) {
+            return ResponseEntity.ok(
+                    new ApiResponseDto(500, "User Not Found", null)
+            );
         }
 
+        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+        photoUrl = (String) uploadResult.get("secure_url");
+
+
         FoundPost foundPost = new FoundPost(
+                user,
                 foundPostDto.postDescription(),
                 foundPostDto.petType(),
                 foundPostDto.breed(),
