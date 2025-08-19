@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -46,5 +47,15 @@ public class FoundPostServiceImpl implements FoundPostService {
         path = path.substring(0, path.lastIndexOf(".")); // remove extension
         System.out.println(path);
         return path; // just the public_id
+    }
+
+    @Override
+    public boolean delete(String postID) {
+        Optional<FoundPost> byId = foundPostRepo.findById(Integer.valueOf(postID));
+        if (byId.isPresent()) {
+            foundPostRepo.delete(byId.get());
+            return true;
+        }
+        throw new NullPointerException("Post not found");
     }
 }

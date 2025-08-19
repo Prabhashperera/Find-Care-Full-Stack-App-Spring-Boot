@@ -102,4 +102,14 @@ public class FoundController {
         return ResponseEntity.ok(new ApiResponseDto(200, "Update Success", updatedUrl));
 
     }
+
+    @DeleteMapping("delete/{postID}")
+    public ResponseEntity<ApiResponseDto> deletePost(@PathVariable String postID) {
+        boolean isDeleted = foundPostService.delete(postID);
+        if (isDeleted) {
+            return ResponseEntity.ok(new ApiResponseDto(200, "Delete Success", null));
+        }
+        return ResponseEntity.ok(new ApiResponseDto(500, "Internal Server Error", null));
+    }
+
 }

@@ -6,4 +6,5 @@ public interface FoundPostService {
     FoundPost save(FoundPost foundPost);
     FoundPost findPostById(int postID);
     String extractPublicIdFromCloudinary(String url);
+    boolean delete(String postID);
 }
