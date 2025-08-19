@@ -1,5 +1,7 @@
 package org.app.findcarespringboot.dto;
 
+import org.app.findcarespringboot.entity.User;
+
 public record FoundPostDto(
         int postID,
         String user,
@@ -15,6 +17,6 @@ public record FoundPostDto(
         String finderName,
         String contactNumber,
         String postDate,
-        String status,
-        String mobileNumber
-) {}
+        String status
+) {
+}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -108,6 +109,17 @@ public class FoundController {
         boolean isDeleted = foundPostService.delete(postID);
         if (isDeleted) {
             return ResponseEntity.ok(new ApiResponseDto(200, "Delete Success", null));
+        }
+        return ResponseEntity.ok(new ApiResponseDto(500, "Internal Server Error", null));
+    }
+
+    @GetMapping("getall")
+    public ResponseEntity<ApiResponseDto> getAllPosts() {
+        List<FoundPostDto> postList = foundPostService.getAll();
+        if (!postList.isEmpty()) {
+            return ResponseEntity.ok(
+                    new ApiResponseDto(200, "Get All Success", postList)
+            );
         }
         return ResponseEntity.ok(new ApiResponseDto(500, "Internal Server Error", null));
     }

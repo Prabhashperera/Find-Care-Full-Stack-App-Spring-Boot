@@ -1,6 +1,7 @@
 package org.app.findcarespringboot.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.app.findcarespringboot.dto.FoundPostDto;
 import org.app.findcarespringboot.entity.FoundPost;
 import org.app.findcarespringboot.exception.DataNotFoundException;
 import org.app.findcarespringboot.exception.InternalServerErrorException;
@@ -11,8 +12,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,5 +60,28 @@ public class FoundPostServiceImpl implements FoundPostService {
             return true;
         }
         throw new NullPointerException("Post not found");
+    }
+    @Override
+    public List<FoundPostDto> getAll() {
+        return foundPostRepo.findAll()
+                .stream()
+                .map(foundPost -> new FoundPostDto(
+                        foundPost.getPostID(),
+                        foundPost.getUser() != null ? foundPost.getUser().getUsername() : null,
+                        foundPost.getPostDescription(),
+                        foundPost.getPetType(),
+                        foundPost.getBreed(),
+                        foundPost.getColor(),
+                        foundPost.getGender(),
+                        foundPost.getPhotoUrl(),
+                        foundPost.getDistrict(),
+                        foundPost.getCity(),
+                        foundPost.getLandmark(),
+                        foundPost.getFinderName(),
+                        foundPost.getContactNumber(),
+                        foundPost.getPostDate(),
+                        foundPost.getStatus()
+                ))
+                .collect(Collectors.toList());
     }
 }
