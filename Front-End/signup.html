@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindCare - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://images.squarespace-cdn.com/content/v1/5d1bf13a3f8e880001289eeb/af672b03-46e4-4a52-ab37-89e0bc042463/beyza-yurtkuran-3Ex793Z3Vx0-unsplash.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .glass {
+            background: rgba(0, 0, 0, 0.7); /* dark glass instead of white */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+
+<div class="glass w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-6 sm:p-8 lg:p-12 shadow-2xl">
+    <div class="text-center mb-6">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-pink-400">🐾 FindCare</h1>
+        <p class="text-gray-300 text-sm sm:text-base lg:text-lg">Join the community & help pets find their way home</p>
+    </div>
+
+    <form action="#" method="POST" class="space-y-4 sm:space-y-5">
+        <div>
+            <label class="block text-gray-200 text-sm mb-2">Full Name</label>
+            <input type="text" placeholder="John Doe" class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+        </div>
+        <div>
+            <label class="block text-gray-200 text-sm mb-2">User Name</label>
+            <input type="text" placeholder="johndoe01" class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-gray-200 text-sm mb-2">Password</label>
+                <input type="password" placeholder="••••••••" class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+            </div>
+            <div>
+                <label class="block text-gray-200 text-sm mb-2">Confirm Password</label>
+                <input type="password" placeholder="••••••••" class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+            </div>
+        </div>
+        <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 transition text-white py-2 sm:py-3 rounded-xl font-semibold shadow-lg text-sm sm:text-base lg:text-lg">Sign Up</button>
+    </form>
+
+    <p class="mt-6 text-center text-gray-400 text-xs sm:text-sm lg:text-base">
+        Already have an account? <a href="#" class="text-pink-400 hover:underline">Login</a>
+    </p>
+</div>
+
+</body>
+</html>
