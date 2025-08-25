@@ -29,23 +29,24 @@
         <p class="text-gray-300 text-sm sm:text-base lg:text-lg">Join the community & help pets find their way home</p>
     </div>
 
-    <form action="#" method="POST" class="space-y-4 sm:space-y-5">
+    <form action="form" method="POST" class="space-y-4 sm:space-y-5">
         <div>
             <label class="block text-gray-200 text-sm mb-2">Full Name</label>
-            <input type="text" placeholder="John Doe" class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+            <input type="text" required placeholder="John Doe" class="full_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
         </div>
         <div>
             <label class="block text-gray-200 text-sm mb-2">User Name</label>
-            <input type="text" placeholder="johndoe01" class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+            <input type="text" required placeholder="johndoe01" name="user_Name" class="user_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+            <p class="username-error text-red-500 text-sm mt-1 hidden">Username already exists, try another.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label class="block text-gray-200 text-sm mb-2">Password</label>
-                <input type="password" placeholder="••••••••" class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+                <input type="password" required placeholder="••••••••" name="user_Password" class="user_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
             </div>
             <div>
                 <label class="block text-gray-200 text-sm mb-2">Confirm Password</label>
-                <input type="password" placeholder="••••••••" class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+                <input type="password" required placeholder="••••••••" name="confirm_Password" class="confirm_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
             </div>
         </div>
         <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 transition text-white py-2 sm:py-3 rounded-xl font-semibold shadow-lg text-sm sm:text-base lg:text-lg">Sign Up</button>
@@ -55,6 +56,7 @@
         Already have an account? <a href="./signin.html" class="text-pink-400 hover:underline">Login</a>
     </p>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="../js/signup.js"></script>
 </body>
 </html>
