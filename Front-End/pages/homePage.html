@@ -2,9 +2,167 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindCare – Lost & Found Pets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body>
 
+<body class="bg-gray-50 text-gray-900">
+
+<!-- Navbar -->
+<nav class="fixed w-full z-20 top-0 left-0 bg-white shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+        <h1 class="text-2xl font-bold text-indigo-600">FindCare 🐾</h1>
+        <div class="space-x-6 hidden md:flex">
+            <a href="#features" class="hover:text-indigo-600 transition">Features</a>
+            <a href="#reviews" class="hover:text-indigo-600 transition">Reviews</a>
+            <a href="#cta" class="hover:text-indigo-600 transition">Get Started</a>
+        </div>
+        <a href="#login" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
+            Login
+        </a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-r from-indigo-600 to-purple-600 text-white pt-32 pb-24 overflow-hidden">
+    <!-- Background Animated Shapes -->
+    <div class="absolute top-[-5rem] left-[-5rem] w-72 h-72 bg-pink-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+    <div class="absolute bottom-[-5rem] right-[-5rem] w-72 h-72 bg-yellow-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+    <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-indigo-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 text-center z-10">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-6" data-aos="fade-up">
+            Reuniting Pets with Families ❤️
+        </h1>
+        <p class="text-lg max-w-2xl mx-auto mb-8 opacity-90" data-aos="fade-up" data-aos-delay="200">
+            FindCare connects lost pets with their owners through a caring community.
+            Report, search, and share — together we bring pets home.
+        </p>
+        <div class="flex justify-center space-x-4" data-aos="zoom-in" data-aos-delay="400">
+            <a href="#report" class="px-6 py-3 bg-white text-indigo-600 font-semibold rounded-xl shadow-lg hover:scale-105 hover:bg-gray-200 transition transform">
+                Report a Pet
+            </a>
+            <a href="#find" class="px-6 py-3 border border-white text-white rounded-xl hover:bg-white hover:text-indigo-600 hover:scale-105 transition transform">
+                Find Pets
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Blob Animation -->
+
+<!-- Features Section -->
+<section id="features" class="py-24 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-extrabold mb-14 text-gray-800" data-aos="fade-down">
+            What We Offer
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-10">
+
+            <!-- Feature Card -->
+            <div class="relative p-8 rounded-2xl bg-white/70 backdrop-blur-md shadow-xl
+                  hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-105"
+                 data-aos="fade-up">
+                <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center
+                    rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">Report Lost Pets</h3>
+                <p class="text-gray-600">
+                    Quickly create a missing pet alert with photos and details — reaching thousands instantly.
+                </p>
+            </div>
+
+            <!-- Feature Card -->
+            <div class="relative p-8 rounded-2xl bg-white/70 backdrop-blur-md shadow-xl
+                  hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-105"
+                 data-aos="fade-up" data-aos-delay="150">
+                <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center
+                    rounded-full bg-gradient-to-r from-green-400 to-teal-500 text-white shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7l6 6-6 6M21 7l-6 6 6 6"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">Find Found Pets</h3>
+                <p class="text-gray-600">
+                    Browse and filter pets reported by others in your city — and help reunite them with their families.
+                </p>
+            </div>
+
+            <!-- Feature Card -->
+            <div class="relative p-8 rounded-2xl bg-white/70 backdrop-blur-md shadow-xl
+                  hover:shadow-2xl transition transform hover:-translate-y-2 hover:scale-105"
+                 data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center
+                    rounded-full bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 11c0-2.21-1.79-4-4-4S4 8.79 4 11c0 3.313 4 7 8 11 4-4 8-7.687 8-11 0-2.21-1.79-4-4-4s-4 1.79-4 4z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">Caring Community</h3>
+                <p class="text-gray-600">
+                    Be part of a trusted network of pet lovers dedicated to helping each other and saving lives.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Ratings Section -->
+<section id="reviews" class="py-20 bg-gray-50">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-10" data-aos="fade-up">Loved by Pet Owners ❤️</h2>
+        <div class="flex justify-center space-x-2 mb-6" data-aos="zoom-in">
+            <span class="text-yellow-400 text-3xl">★</span>
+            <span class="text-yellow-400 text-3xl">★</span>
+            <span class="text-yellow-400 text-3xl">★</span>
+            <span class="text-yellow-400 text-3xl">★</span>
+            <span class="text-yellow-400 text-3xl">★</span>
+        </div>
+        <blockquote class="italic text-gray-700 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            “Thanks to FindCare, I found my lost cat in just 2 days! The community is amazing and supportive.”
+        </blockquote>
+        <p class="mt-4 font-semibold" data-aos="fade-up" data-aos-delay="400">– A happy pet parent 🐱</p>
+    </div>
+</section>
+
+<!-- Call To Action -->
+<section id="cta" class="py-24 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-center">
+    <h2 class="text-4xl font-bold mb-4" data-aos="zoom-in">Ready to Help a Pet Today?</h2>
+    <p class="mb-6 text-lg opacity-90" data-aos="fade-up">Join the network and make a difference.</p>
+    <a href="#signup" class="px-8 py-4 bg-white text-indigo-600 font-bold rounded-xl shadow-lg hover:scale-110 hover:bg-gray-200 transition transform" data-aos="zoom-in" data-aos-delay="200">
+        Get Started
+    </a>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-400 py-6 mt-12">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+        <p>© 2025 FindCare. All rights reserved.</p>
+        <div class="flex space-x-4 mt-4 md:mt-0">
+            <a href="#" class="hover:text-white">Facebook</a>
+            <a href="#" class="hover:text-white">Twitter</a>
+            <a href="#" class="hover:text-white">Instagram</a>
+        </div>
+    </div>
+</footer>
+
+<!-- AOS Init -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+</script>
 </body>
 </html>

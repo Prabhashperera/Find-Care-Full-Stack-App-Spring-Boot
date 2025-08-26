@@ -15,6 +15,10 @@ $("form").on("submit" , (e) => {
         success: function (data) {
             console.log(data.data);
             localStorage.setItem("token", data.data);
+            // maybe show a toast first?
+            setTimeout(() => {
+                window.location.href = "../pages/homePage.html";
+            }, 1000); // delay 1s for smoother UX
         }
 
     })
