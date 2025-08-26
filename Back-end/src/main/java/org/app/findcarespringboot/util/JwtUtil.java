@@ -30,10 +30,11 @@ public class JwtUtil { // Helper class for JWT operations
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token); // verifies token
-            return true; // valid
-        } catch (JwtException e) {
-            return false; // invalid or expired
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false; // token invalid or expired
         }
     }
+
 }
