@@ -1,5 +1,6 @@
 package org.app.findcarespringboot.util;
 
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
@@ -25,5 +26,14 @@ public class JwtUtil { // Helper class for JWT operations
                 .parseClaimsJws(token) // Parse claims
                 .getBody() // Get token body
                 .getSubject(); // Extract username
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token); // verifies token
+            return true; // valid
+        } catch (JwtException e) {
+            return false; // invalid or expired
+        }
     }
 }

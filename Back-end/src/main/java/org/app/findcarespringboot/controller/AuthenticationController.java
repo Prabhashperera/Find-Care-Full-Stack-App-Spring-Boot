@@ -5,8 +5,12 @@ import org.app.findcarespringboot.dto.UserDto;
 import org.app.findcarespringboot.dto.response.ApiResponseDto;
 import org.app.findcarespringboot.entity.User;
 import org.app.findcarespringboot.service.AuthenticationService;
+import org.app.findcarespringboot.util.JwtUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/auth")
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+    private final JwtUtil jwtUtil;
 
     @PostMapping("signup")
     public ResponseEntity<ApiResponseDto> userRegister(@RequestBody UserDto user) {
@@ -34,6 +39,21 @@ public class AuthenticationController {
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "Login Success", token) //Standard Api Response
         );
+    }
+
+    @GetMapping("/validate-token")
+    public ResponseEntity<?> validateToken(@RequestHeader("Authorization") String authHeader) {
+        try {
+            String token = authHeader.substring(7); // remove "Bearer "
+            boolean valid = jwtUtil.validateToken(token); // your JWT utility method
+            if (valid) {
+                return ResponseEntity.ok(Map.of("message", "Token is valid"));
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Token invalid or expired"));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Token invalid"));
+        }
     }
 }
 
