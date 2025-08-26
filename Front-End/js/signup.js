@@ -14,6 +14,9 @@ $("form").on("submit" , (e) => {
         data: JSON.stringify(payload),
         success: function(response) {
             console.log("Success:", response);
+            setTimeout(() => {
+                window.location.href = "../pages/signin.html";
+            }, 1000); // delay 1s for smoother UX
         },
         error: function(xhr) {
             if (xhr.status === 409) {

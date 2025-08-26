@@ -2,18 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <title>Found Pets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen">
+
+<!-- Navbar -->
+<nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <span class="font-bold text-xl text-white">🐾 PetFinder</span>
+            <!--            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Pets_icon.svg" alt="Logo" class="h-10 w-10 rounded-full border-2 border-white">-->
+        </div>
+        <ul class="flex space-x-6 text-white">
+            <li><a href="index.html" class="hover:text-yellow-300 font-medium transition">Home</a></li>
+            <li><a href="foundPets.html" class="underline decoration-yellow-300 font-medium transition">Found Pets</a></li>
+            <li><a href="lostPets.html" class="hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Filter Section -->
+<section class="max-w-7xl mx-auto px-6 py-6 bg-white shadow-md rounded-md mt-6">
+    <h2 class="text-2xl font-bold mb-4">Filter Found Pets</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <select id="petTypeFilter" class="border border-gray-300 rounded px-3 py-2">
+            <option value="">All Types</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+        </select>
+
+        <select id="breedFilter" class="border border-gray-300 rounded px-3 py-2">
+            <option value="">All Breeds</option>
+            <option value="Labrador">Labrador</option>
+            <option value="Persian">Persian</option>
+        </select>
+
+        <select id="districtFilter" class="border border-gray-300 rounded px-3 py-2">
+            <option value="">All Districts</option>
+            <option value="Colombo">Colombo</option>
+            <option value="Kandy">Kandy</option>
+        </select>
+
+        <select id="cityFilter" class="border border-gray-300 rounded px-3 py-2">
+            <option value="">All Cities</option>
+        </select>
+    </div>
+</section>
+
+<!-- Found Pets Grid -->
 <section class="max-w-7xl mx-auto px-6 py-12">
-  <h2 class="text-3xl font-bold mb-8 text-center">Found Pets</h2>
-  <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <!-- Dynamic posts will appear here -->
-  </div>
+    <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Found Pets</h2>
+    <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Example Card -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition transform duration-300">
+            <img src="https://via.placeholder.com/400x25" alt="Pet" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Bella</h3>
+                <p class="text-gray-600 mb-2">Dog - Labrador</p>
+                <p class="text-gray-500 text-sm">Colombo District</p>
+                <button class="mt-3 bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 transition">View Details</button>
+            </div>
+        </div>
+    </div>
 </section>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="../js/foundPostSection.js"></script>
+<script>
+    const districtCities = {
+        "Colombo": ["Colombo", "Dehiwala", "Moratuwa", "Nugegoda"],
+        "Kandy": ["Kandy", "Peradeniya", "Gampola"]
+    };
+
+    const districtFilter = document.getElementById('districtFilter');
+    const cityFilter = document.getElementById('cityFilter');
+
+    districtFilter.addEventListener('change', () => {
+        const district = districtFilter.value;
+        cityFilter.innerHTML = '<option value="">All Cities</option>'; // reset
+
+        if(district && districtCities[district]) {
+            districtCities[district].forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                cityFilter.appendChild(option);
+            });
+        }
+    });
+
+    // Example: listen for changes to filter posts
+    $('#petTypeFilter, #breedFilter, #districtFilter, #cityFilter').on('change', function() {
+        const type = $('#petTypeFilter').val();
+        const breed = $('#breedFilter').val();
+        const district = $('#districtFilter').val();
+        const city = $('#cityFilter').val();
+        console.log("Filter:", type, breed, district, city);
+        // Call your JS function to filter posts dynamically
+    });
+</script>
 </body>
 </html>
