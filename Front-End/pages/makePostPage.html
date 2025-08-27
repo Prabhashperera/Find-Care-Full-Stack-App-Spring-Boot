@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Pet Post</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="bg-gradient-to-r from-blue-100 to-purple-100 min-h-screen flex items-center justify-center p-4">
+
+<!-- Post Creation Container -->
+<div class="bg-white w-full max-w-4xl mx-auto p-8 rounded-3xl shadow-2xl overflow-hidden transform transition hover:scale-105 duration-300">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-8 text-gray-800">Create a Pet Post</h2>
+
+    <!-- Pet Image Upload -->
+    <div class="flex justify-center mb-8">
+        <label for="petImage" class="cursor-pointer">
+            <div id="imagePreview" class="w-40 h-40 sm:w-48 sm:h-48 border-4 border-dashed border-gray-300 rounded-full flex items-center justify-center hover:border-blue-500 transition overflow-hidden bg-gray-100 relative">
+                <svg id="cameraIcon" xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 hover:text-blue-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M16 3v4M8 3v4m8 4l-4-4-4 4m0 0v6h8v-6" />
+                </svg>
+                <input type="file" id="petImage" class="hidden" accept="image/*">
+            </div>
+        </label>
+    </div>
+
+    <!-- Form -->
+    <form class="space-y-6">
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Pet Name</label>
+            <input type="text" placeholder="Enter pet name" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Pet Type</label>
+                <select class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                    <option value="">Select Type</option>
+                    <option value="Dog">Dog</option>
+                    <option value="Cat">Cat</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Breed</label>
+                <input type="text" placeholder="Enter breed" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">District</label>
+                <select id="district" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                    <option value="">Select District</option>
+                    <option value="Colombo">Colombo</option>
+                    <option value="Kandy">Kandy</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">City</label>
+                <select id="city" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                    <option value="">Select City</option>
+                </select>
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Status</label>
+            <select class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                <option value="">Select Status</option>
+                <option value="Found">Found</option>
+                <option value="Lost">Lost</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 font-medium mb-2">Description</label>
+            <textarea placeholder="Write details about the pet..." class="w-full border border-gray-300 rounded-2xl px-4 py-3 h-28 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-extrabold py-3 rounded-2xl hover:from-purple-500 hover:to-blue-500 transition shadow-lg">Create Post</button>
+    </form>
+</div>
+
+<script>
+    // Example dynamic city dropdown
+    const districtCities = {
+        "Colombo": ["Colombo", "Dehiwala", "Moratuwa", "Nugegoda"],
+        "Kandy": ["Kandy", "Peradeniya", "Gampola"]
+    };
+
+    const districtSelect = document.getElementById('district');
+    const citySelect = document.getElementById('city');
+
+    districtSelect.addEventListener('change', () => {
+        const district = districtSelect.value;
+        citySelect.innerHTML = '<option value="">Select City</option>';
+
+        if(district && districtCities[district]){
+            districtCities[district].forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+        }
+    });
+
+    const petImageInput = document.getElementById('petImage');
+    const imagePreview = document.getElementById('imagePreview');
+    const cameraIcon = document.getElementById('cameraIcon');
+
+    petImageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = function(e){
+                imagePreview.style.backgroundImage = `url(${e.target.result})`;
+                imagePreview.style.backgroundSize = 'cover';
+                imagePreview.style.backgroundPosition = 'center';
+                cameraIcon.style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+</body>
+</html>

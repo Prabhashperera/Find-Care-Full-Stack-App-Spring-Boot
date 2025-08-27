@@ -1,11 +1,11 @@
 $(document).ready(function() {
-    const token = localStorage.getItem("token"); // if you want auth
+    const accessToken = localStorage.getItem("accessToken"); // if you want auth
 
     $.ajax({
         url: "http://localhost:8080/api/found/getall",
         type: "GET",
         headers: {
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + accessToken
         },
         success: function(response) {
             if (response.status === 200 && response.data) {
@@ -35,6 +35,40 @@ $(document).ready(function() {
         error: function(err) {
             console.error("Error fetching posts:", err);
             $("#postsContainer").html("<p class='text-center text-red-500'>Failed to load posts.</p>");
+            apiRequest("http://localhost:8080/api/found/getall" , "GET", null);
         }
     });
 });
+
+
+function apiRequest(url, method, data) {
+    return $.ajax({
+        url: url,
+        method: method,
+        data: data,
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("accessToken")
+        }
+    }).fail(function(xhr) {
+        if (xhr.status === 401) {
+            // Access token expired → try refresh
+            return $.ajax({
+                url: "/refresh-token",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ refreshToken: localStorage.getItem("refreshToken") })
+            }).then(function(response) {
+                // Save new access token
+                localStorage.setItem("accessToken", response.accessToken);
+                // Retry original request
+                return apiRequest(url, method, data);
+            }).fail(function() {
+                // Refresh token expired → logout
+                alert("Session expired! Please log in again.");
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+                window.location.href = "/login.html";
+            });
+        }
+    });
+}
