@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -34,12 +35,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public String loginUser(User user) {
+    public Map<String, String> loginUser(User user) {
         User foundUser = userRepo.findByUsername(user.getUsername());
         if (foundUser != null) {
             boolean matches = passwordEncoder.matches(user.getPassword(), foundUser.getPassword());
             if (matches) {
-                return jwtUtil.generateToken(foundUser.getUsername()); //Generating JWT Token
+                String accessToken = jwtUtil.generateToken(user.getUsername(), 1000 * 60 * 15); // 15 min
+                String refreshToken = jwtUtil.generateToken(user.getUsername(), 1000L * 60 * 60 * 24 * 7); // 7 days
+                return Map.of("accessToken", accessToken , "refreshToken" , refreshToken);//Generating JWT Token
             }
         }
         throw new BadCredentialsException("Invalid username or password");

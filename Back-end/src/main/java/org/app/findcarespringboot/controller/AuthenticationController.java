@@ -35,7 +35,7 @@ public class AuthenticationController {
 
     @PostMapping("login")
     public ResponseEntity<ApiResponseDto> userLogin(@RequestBody UserDto user) {
-        String token = authenticationService.loginUser(new User(user.getUsername(), user.getPassword()));
+        Map<String, String> token = authenticationService.loginUser(new User(user.getUsername(), user.getPassword()));
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "Login Success", token) //Standard Api Response
         );
@@ -55,6 +55,20 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Token invalid"));
         }
     }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<?> refresh(@RequestBody Map<String, String> request) {
+        String refreshToken = request.get("refreshToken");
+
+        if (jwtUtil.validateToken(refreshToken)) {
+            String username = jwtUtil.extractUsername(refreshToken);
+            String newAccessToken = jwtUtil.generateToken(username, 1000 * 60 * 15); // 15 min
+            return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh token expired");
+        }
+    }
+
 }
 
 
