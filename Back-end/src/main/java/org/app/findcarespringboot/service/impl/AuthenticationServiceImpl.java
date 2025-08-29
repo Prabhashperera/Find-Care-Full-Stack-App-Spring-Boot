@@ -40,7 +40,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (foundUser != null) {
             boolean matches = passwordEncoder.matches(user.getPassword(), foundUser.getPassword());
             if (matches) {
-                String accessToken = jwtUtil.generateToken(user.getUsername(), 1000 * 60 * 15); // 15 min
+                String accessToken = jwtUtil.generateToken(user.getUsername(), 1000L * 60 * 60 * 20); // set this LABELLLLL FIX THIS
+                System.out.println(accessToken + "palweni Paa hari");
                 String refreshToken = jwtUtil.generateToken(user.getUsername(), 1000L * 60 * 60 * 24 * 7); // 7 days
                 return Map.of("accessToken", accessToken , "refreshToken" , refreshToken);//Generating JWT Token
             }

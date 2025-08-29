@@ -56,18 +56,19 @@ public class AuthenticationController {
         }
     }
 
-    @PostMapping("/refresh-token")
-    public ResponseEntity<?> refresh(@RequestBody Map<String, String> request) {
-        String refreshToken = request.get("refreshToken");
-
-        if (jwtUtil.validateToken(refreshToken)) {
-            String username = jwtUtil.extractUsername(refreshToken);
-            String newAccessToken = jwtUtil.generateToken(username, 1000 * 60 * 15); // 15 min
-            return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh token expired");
-        }
-    }
+//    @PostMapping("/refresh-token")
+//    public ResponseEntity<?> refresh(@RequestBody Map<String, String> request) {
+//        String refreshToken = request.get("refreshToken");
+//
+//        if (jwtUtil.validateToken(refreshToken)) {
+//            String username = jwtUtil.extractUsername(refreshToken);
+//            String newAccessToken = jwtUtil.generateToken(username, 1000 * 60 * 1);
+//            System.out.println(newAccessToken + "aluth ekath hari");
+//            return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh token expired");
+//        }
+//    }
 
 }
 
