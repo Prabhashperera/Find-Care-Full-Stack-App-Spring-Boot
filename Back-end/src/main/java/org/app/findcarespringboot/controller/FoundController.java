@@ -4,6 +4,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.app.findcarespringboot.dto.FoundPostDto;
 import org.app.findcarespringboot.entity.FoundPost;
 import org.app.findcarespringboot.entity.User;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("api/found")
 @CrossOrigin
@@ -30,6 +32,7 @@ public class FoundController {
 
     @PostMapping(path = "save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponseDto> savePost(@RequestPart("dto") String dto, @RequestPart("file") MultipartFile file) throws IOException {
+        log.info("Saving post endpoint reached");
         String photoUrl = null;
 
         ObjectMapper mapper = new ObjectMapper();

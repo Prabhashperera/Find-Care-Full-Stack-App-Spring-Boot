@@ -34,12 +34,29 @@ $("form").on("submit", (e) => {
         data: formData,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+            $("#loader").removeClass("hidden"); // show loader
+        },
         success: function (data) {
             console.log(data.data);
         },
         error: function (xhr) {
             console.error(xhr);
-            alert("Error saving post!");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+            });
+        },
+        complete: function (xhr) {
+            $("#loader").addClass("hidden");// hide loader
+            Swal.fire({
+                title: "Good job!",
+                text: "Thank you for your Kindness!",
+                icon: "success"
+            });
+            $("form")[0].reset(); // resets all form inputs instantly
+            $("#petImage").val("");
         }
     });
 
