@@ -35,7 +35,7 @@ public class AuthenticationController {
 
     @PostMapping("login")
     public ResponseEntity<ApiResponseDto> userLogin(@RequestBody UserDto user) {
-        Map<String, String> token = authenticationService.loginUser(new User(user.getUsername(), user.getPassword()));
+        String token = authenticationService.loginUser(new User(user.getUsername(), user.getPassword()));
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "Login Success", token) //Standard Api Response
         );

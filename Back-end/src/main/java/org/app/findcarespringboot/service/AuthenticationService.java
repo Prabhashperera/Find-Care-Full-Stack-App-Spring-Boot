@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface AuthenticationService {
     User saveUser(User user);
-    Map<String, String> loginUser(User user);
+    String loginUser(User user);
     User findById(String i);
 }

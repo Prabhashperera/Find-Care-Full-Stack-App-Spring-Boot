@@ -28,13 +28,13 @@
     <form class="space-y-6">
         <div>
             <label class="block text-gray-700 font-medium mb-2">Pet Description</label>
-            <textarea placeholder="Describe the pet..." class="w-full border border-gray-300 rounded-2xl px-4 py-3 h-28 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"></textarea>
+            <textarea placeholder="Describe the pet..." id="postDescription" class="w-full border border-gray-300 rounded-2xl px-4 py-3 h-28 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"></textarea>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label class="block text-gray-700 font-medium mb-2">Pet Type</label>
-                <select class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                <select id="petType" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
                     <option value="">Select Type</option>
                     <option value="Dog">Dog</option>
                     <option value="Cat">Cat</option>
@@ -42,18 +42,18 @@
             </div>
             <div>
                 <label class="block text-gray-700 font-medium mb-2">Breed</label>
-                <input type="text" placeholder="Enter breed" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                <input id="breed" type="text" placeholder="Enter breed" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
             </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label class="block text-gray-700 font-medium mb-2">Color</label>
-                <input type="text" placeholder="Pet color" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                <input id="color" type="text" placeholder="Pet color" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
             </div>
             <div>
                 <label class="block text-gray-700 font-medium mb-2">Gender</label>
-                <select class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                <select id="gender" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -77,18 +77,18 @@
                 </select>
             </div>
             <div>
-                <label class="block text-gray-700 font-medium mb-2">Landmark</label>
+                <label id="landmark" class="block text-gray-700 font-medium mb-2">Landmark</label>
                 <input type="text" placeholder="Near bus stand, temple..." class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
             </div>
         </div>
 
         <div>
             <label class="block text-gray-700 font-medium mb-2">Finder Name</label>
-            <input type="text" placeholder="Enter your name" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+            <input id="finderName" type="text" placeholder="Enter your name" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
         </div>
 
         <div>
-            <label class="block text-gray-700 font-medium mb-2">Contact Number</label>
+            <label id="contactNumber" class="block text-gray-700 font-medium mb-2">Contact Number</label>
             <input type="text" placeholder="Enter contact number" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
         </div>
 
