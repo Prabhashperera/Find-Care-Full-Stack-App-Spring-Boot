@@ -1,6 +1,8 @@
 
 $("form").on("submit", (e) => {
     e.preventDefault();
+    let accessToken = localStorage.getItem("accessToken");
+    let userName = localStorage.getItem("userName");
 
     // Collect your dto object
     let dto = {
@@ -16,7 +18,29 @@ $("form").on("submit", (e) => {
         contactNumber: $("#contactNumber").val(),
         postDate: new Date().toISOString(),
         status: "ACTIVE",
+        user: userName,
     };
 
+    let formData = new FormData();
+    formData.append("dto" , JSON.stringify(dto));
+    formData.append("file" , $("#petImage")[0].files[0]);
+
+    $.ajax({
+        url: "http://localhost:8080/api/found/save",
+        type: "POST",
+        headers: {
+            "Authorization": `Bearer ${accessToken}`
+        },
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            console.log(data.data);
+        },
+        error: function (xhr) {
+            console.error(xhr);
+            alert("Error saving post!");
+        }
+    });
 
 })

@@ -15,6 +15,7 @@ $("form").on("submit" , (e) => {
         success: function (data) {
             console.log(data.data);
             localStorage.setItem("accessToken", data.data);
+            localStorage.setItem("userName", userData.username);
             // maybe show a toast first?
             setTimeout(() => {
                 window.location.href = "../pages/homePage.html";
