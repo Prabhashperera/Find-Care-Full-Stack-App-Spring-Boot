@@ -27,29 +27,38 @@
 <!-- Filter Section -->
 <section class="max-w-7xl mx-auto px-6 py-6 bg-white shadow-md rounded-md mt-6">
     <h2 class="text-2xl font-bold mb-4">Filter Found Pets</h2>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <select id="petTypeFilter" class="border border-gray-300 rounded px-3 py-2">
-            <option value="">All Types</option>
-            <option value="Dog">Dog</option>
-            <option value="Cat">Cat</option>
-        </select>
 
-        <select id="breedFilter" class="border border-gray-300 rounded px-3 py-2">
-            <option value="">All Breeds</option>
-            <option value="Labrador">Labrador</option>
-            <option value="Persian">Persian</option>
-        </select>
+    <form id="filterForm">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <select id="petTypeFilter" name="petType" class="border border-gray-300 rounded px-3 py-2">
+                <option value="">All Types</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+            </select>
 
-        <select id="districtFilter" class="border border-gray-300 rounded px-3 py-2">
-            <option value="">All Districts</option>
-            <option value="Colombo">Colombo</option>
-            <option value="Kandy">Kandy</option>
-        </select>
+            <select id="districtFilter" name="district" class="border border-gray-300 rounded px-3 py-2">
+                <option value="">All Districts</option>
+                <option value="Colombo">Colombo</option>
+                <option value="Kandy">Kandy</option>
+            </select>
 
-        <select id="cityFilter" class="border border-gray-300 rounded px-3 py-2">
-            <option value="">All Cities</option>
-        </select>
-    </div>
+            <select id="cityFilter" name="city" class="border border-gray-300 rounded px-3 py-2">
+                <option value="">All Cities</option>
+            </select>
+
+            <!-- Status -->
+            <select id="statusFilter" name="status" class="border border-gray-300 rounded px-3 py-2">
+                <option value="ACTIVE">Active</option>
+                <option value="SUCCESS">Success</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                    class="bg-indigo-600 text-white rounded px-4 py-2 shadow hover:bg-indigo-700 transition">
+                Apply Filters
+            </button>
+        </div>
+    </form>
 </section>
 
 <!-- Found Pets Grid -->
@@ -96,15 +105,6 @@
         }
     });
 
-    // Example: listen for changes to filter posts
-    $('#petTypeFilter, #breedFilter, #districtFilter, #cityFilter').on('change', function() {
-        const type = $('#petTypeFilter').val();
-        const breed = $('#breedFilter').val();
-        const district = $('#districtFilter').val();
-        const city = $('#cityFilter').val();
-        console.log("Filter:", type, breed, district, city);
-        // Call your JS function to filter posts dynamically
-    });
 </script>
 
 </body>

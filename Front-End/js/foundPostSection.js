@@ -39,3 +39,33 @@ function loadPosts() {
         }
     });
 }
+
+$("#filterForm").on("submit", function (e) {
+    e.preventDefault();
+
+    // Grab filter values
+    const petType = document.getElementById("petTypeFilter").value;
+    const status = document.getElementById("statusFilter").value;
+    const district = document.getElementById("districtFilter").value;
+    const city = document.getElementById("cityFilter").value;
+
+    loadPosts({petType, status, district, city});
+
+});
+
+
+function loadFilteredPosts(filter) {
+    $.ajax({
+        url: "http://localhost:8080/api/found/filterpost",
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("accessToken")
+        },
+        data: filter,
+        success: function (response) {
+            if (response.status === 200) {
+                console.log(response);
+            }
+        }
+    })
+}

@@ -5,6 +5,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.app.findcarespringboot.dto.FilterPostsDto;
 import org.app.findcarespringboot.dto.FoundPostDto;
 import org.app.findcarespringboot.entity.FoundPost;
 import org.app.findcarespringboot.entity.User;
@@ -125,6 +126,13 @@ public class FoundController {
             );
         }
         return ResponseEntity.ok(new ApiResponseDto(500, "Internal Server Error", null));
+    }
+
+    @GetMapping("filterpost")
+    public ResponseEntity<ApiResponseDto> filterPost(@RequestBody FilterPostsDto filterDto) {
+        System.out.println("Reach Controller");
+        System.out.println(filterDto);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Filter Posts Success", filterDto));
     }
 
 }
