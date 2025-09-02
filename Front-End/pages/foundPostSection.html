@@ -1,125 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Found Pets</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Found Pets</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen">
 
 <!-- Navbar -->
 <nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <span class="font-bold text-xl text-white">🐾 PetFinder</span>
-            <!--            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Pets_icon.svg" alt="Logo" class="h-10 w-10 rounded-full border-2 border-white">-->
-        </div>
-        <ul class="flex space-x-6 text-white">
-            <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition">Home</a></li>
-            <li><a href="./foundPostSection.html" class="underline decoration-yellow-300 font-medium transition">Found Pets</a></li>
-            <li><a href="lostPets.html" class="hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
-            <li><a href="./makePostPage.html" class="hover:text-yellow-300 font-medium transition">Make Post</a></li>
-        </ul>
-
-        <div class="relative">
-            <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
-                <!-- Circle with profile icon -->
-                <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white">
-                    <!-- Heroicon: User -->
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         fill="none" viewBox="0 0 24 24"
-                         stroke-width="1.8" stroke="currentColor"
-                         class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0" />
-                    </svg>
-                </div>
-            </button>
-
-            <!-- Dropdown Menu -->
-            <div id="dropdownMenu"
-                 class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2">
-                <a href="#profile" class="block px-4 py-2 hover:bg-indigo-100">👤 Profile</a>
-                <a href="#myposts" class="block px-4 py-2 hover:bg-indigo-100">📝 My Posts</a>
-                <a href="#logout" class="block px-4 py-2 text-red-600 hover:bg-red-100">🚪 Logout</a>
-            </div>
-        </div>
-
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+      <span class="font-bold text-xl text-white">🐾 PetFinder</span>
+      <!--            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Pets_icon.svg" alt="Logo" class="h-10 w-10 rounded-full border-2 border-white">-->
     </div>
+    <ul class="flex space-x-6 text-white">
+      <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition">Home</a></li>
+      <li><a href="./foundPostSection.html" class="underline decoration-yellow-300 font-medium transition">Found Pets</a></li>
+      <li><a href="lostPets.html" class="hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
+      <li><a href="./makePostPage.html" class="hover:text-yellow-300 font-medium transition">Make Post</a></li>
+    </ul>
+
+    <div class="relative">
+      <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
+        <!-- Circle with profile icon -->
+        <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white">
+          <!-- Heroicon: User -->
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none" viewBox="0 0 24 24"
+               stroke-width="1.8" stroke="currentColor"
+               class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0" />
+          </svg>
+        </div>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div id="dropdownMenu"
+           class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2">
+        <a href="#profile" class="block px-4 py-2 hover:bg-indigo-100">👤 Profile</a>
+        <a href="#myposts" class="block px-4 py-2 hover:bg-indigo-100">📝 My Posts</a>
+        <a href="#logout" class="block px-4 py-2 text-red-600 hover:bg-red-100">🚪 Logout</a>
+      </div>
+    </div>
+
+  </div>
 
 
 </nav>
 
 <!-- Filter Section -->
 <section class="max-w-7xl mx-auto px-6 py-6 bg-white shadow-md rounded-md mt-6">
-    <h2 class="text-2xl font-bold mb-4">Filter Found Pets</h2>
+  <h2 class="text-2xl font-bold mb-4">Filter Found Pets</h2>
 
-    <form id="filterForm">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <select id="petTypeFilter" name="petType" class="border border-gray-300 rounded px-3 py-2">
-                <option value="">All Types</option>
-                <option value="Dog">Dog</option>
-                <option value="Cat">Cat</option>
-            </select>
+  <form id="filterForm">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <select id="petTypeFilter" name="petType" class="border border-gray-300 rounded px-3 py-2">
+        <option value="">All Types</option>
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+      </select>
 
-            <select id="districtFilter" name="district" class="border border-gray-300 rounded px-3 py-2">
-                <option value="">All Districts</option>
-                <option value="Colombo">Colombo</option>
-                <option value="Kandy">Kandy</option>
-            </select>
+      <select id="districtFilter" name="district" class="border border-gray-300 rounded px-3 py-2">
+        <option value="">All Districts</option>
+        <option value="Colombo">Colombo</option>
+        <option value="Kandy">Kandy</option>
+      </select>
 
-            <select id="cityFilter" name="city" class="border border-gray-300 rounded px-3 py-2">
-                <option value="">All Cities</option>
-            </select>
+      <select id="cityFilter" name="city" class="border border-gray-300 rounded px-3 py-2">
+        <option value="">All Cities</option>
+      </select>
 
-            <!-- Status -->
-            <select id="statusFilter" name="status" class="border border-gray-300 rounded px-3 py-2">
-                <option value="ACTIVE">Active</option>
-                <option value="SUCCESS">Success</option>
-            </select>
+      <!-- Status -->
+      <select id="statusFilter" name="status" class="border border-gray-300 rounded px-3 py-2">
+        <option value="ACTIVE">Active</option>
+        <option value="SUCCESS">Success</option>
+      </select>
 
-            <!-- Submit Button -->
-            <button type="submit"
-                    class="bg-indigo-600 text-white rounded px-4 py-2 shadow hover:bg-indigo-700 transition">
-                Apply Filters
-            </button>
-        </div>
-    </form>
+      <!-- Submit Button -->
+      <button type="submit"
+              class="bg-indigo-600 text-white rounded px-4 py-2 shadow hover:bg-indigo-700 transition">
+        Apply Filters
+      </button>
+    </div>
+  </form>
 </section>
 
 <!-- Found Pets Grid -->
 <section class="max-w-7xl mx-auto px-6 py-12">
-    <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Found Pets</h2>
-    <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Example Card -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition transform duration-300">
-            <img src="https://via.placeholder.com/400x25" alt="Pet" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-2">Bella</h3>
-                <p class="text-gray-600 mb-2">Dog - Labrador</p>
-                <p class="text-gray-500 text-sm">Colombo District</p>
-                <button class="mt-3 bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 transition">View Details</button>
-            </div>
-        </div>
+  <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Found Pets</h2>
+  <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <!-- Example Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition transform duration-300">
+      <img src="https://via.placeholder.com/400x25" alt="Pet" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Bella</h3>
+        <p class="text-gray-600 mb-2">Dog - Labrador</p>
+        <p class="text-gray-500 text-sm">Colombo District</p>
+        <button class="mt-3 bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 transition">View Details</button>
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- Post Details Modal -->
 <div id="postModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 relative">
-        <button id="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">&times;</button>
+  <div class="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 relative">
+    <button id="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">&times;</button>
 
-        <img id="modalPhoto" src="" alt="Pet" class="w-full h-64 object-cover rounded-xl mb-4">
-        <h3 id="modalTitle" class="text-2xl font-bold text-gray-800 mb-2"></h3>
-        <p id="modalDescription" class="text-gray-700 mb-3"></p>
-        <p id="modalExtra" class="text-gray-500 text-sm mb-2"></p>
-        <p id="modalLocation" class="text-gray-500 text-sm mb-2"></p>
-        <p id="modalContact" class="text-gray-500 text-sm mb-2"></p>
-        <p id="modalLandmark" class="text-gray-500 text-sm mb-2"></p>
-        <p id="modalStatus" class="text-gray-500 text-sm mb-2 font-semibold"></p>
-        <p id="modalUser" class="text-gray-400 text-xs font-semibold"></p>
-    </div>
+    <img id="modalPhoto" src="" alt="Pet" class="w-full h-64 object-cover rounded-xl mb-4">
+    <h3 id="modalTitle" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+    <p id="modalDescription" class="text-gray-700 mb-3"></p>
+    <p id="modalExtra" class="text-gray-500 text-sm mb-2"></p>
+    <p id="modalLocation" class="text-gray-500 text-sm mb-2"></p>
+    <p id="modalContact" class="text-gray-500 text-sm mb-2"></p>
+    <p id="modalLandmark" class="text-gray-500 text-sm mb-2"></p>
+    <p id="modalStatus" class="text-gray-500 text-sm mb-2 font-semibold"></p>
+    <p id="modalUser" class="text-gray-400 text-xs font-semibold"></p>
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -127,41 +127,41 @@
 <script src="../js/foundPostSection.js"></script>
 
 <script>
-    const districtCities = {
-        "Colombo": ["Colombo", "Dehiwala", "Moratuwa", "Nugegoda"],
-        "Kandy": ["Kandy", "Peradeniya", "Gampola"]
-    };
+  const districtCities = {
+    "Colombo": ["Colombo", "Dehiwala", "Moratuwa", "Nugegoda"],
+    "Kandy": ["Kandy", "Peradeniya", "Gampola"]
+  };
 
-    const districtFilter = document.getElementById('districtFilter');
-    const cityFilter = document.getElementById('cityFilter');
+  const districtFilter = document.getElementById('districtFilter');
+  const cityFilter = document.getElementById('cityFilter');
 
-    districtFilter.addEventListener('change', () => {
-        const district = districtFilter.value;
-        cityFilter.innerHTML = '<option value="">All Cities</option>'; // reset
+  districtFilter.addEventListener('change', () => {
+    const district = districtFilter.value;
+    cityFilter.innerHTML = '<option value="">All Cities</option>'; // reset
 
-        if(district && districtCities[district]) {
-            districtCities[district].forEach(city => {
-                const option = document.createElement('option');
-                option.value = city;
-                option.textContent = city;
-                cityFilter.appendChild(option);
-            });
-        }
-    });
+    if(district && districtCities[district]) {
+      districtCities[district].forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        cityFilter.appendChild(option);
+      });
+    }
+  });
 
-    const profileBtn = document.getElementById("profileBtn");
-    const dropdownMenu = document.getElementById("dropdownMenu");
+  const profileBtn = document.getElementById("profileBtn");
+  const dropdownMenu = document.getElementById("dropdownMenu");
 
-    profileBtn.addEventListener("click", () => {
-        dropdownMenu.classList.toggle("hidden");
-    });
+  profileBtn.addEventListener("click", () => {
+    dropdownMenu.classList.toggle("hidden");
+  });
 
-    // Close dropdown if clicked outside
-    window.addEventListener("click", (e) => {
-        if (!profileBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
-            dropdownMenu.classList.add("hidden");
-        }
-    });
+  // Close dropdown if clicked outside
+  window.addEventListener("click", (e) => {
+    if (!profileBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.classList.add("hidden");
+    }
+  });
 
 </script>
 

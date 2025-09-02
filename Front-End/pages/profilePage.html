@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetFinder - Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<!-- Navbar -->
+<nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <span class="font-bold text-xl text-white">🐾 PetFinder</span>
+        </div>
+        <ul class="flex space-x-6 text-white">
+            <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition">Home</a></li>
+            <li><a href="./" class="underline decoration-yellow-300 font-medium transition">Found Pets</a></li>
+            <li><a href="lostPets.html" class="hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
+            <li><a href="./makePostPage.html" class="hover:text-yellow-300 font-medium transition">Make Post</a></li>
+        </ul>
+        <div class="relative">
+            <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
+                <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none" viewBox="0 0 24 24"
+                         stroke-width="1.8" stroke="currentColor"
+                         class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0" />
+                    </svg>
+                </div>
+            </button>
+            <div id="dropdownMenu"
+                 class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2">
+                <a href="#profile" class="block px-4 py-2 hover:bg-indigo-100">👤 Profile</a>
+                <a href="#myposts" class="block px-4 py-2 hover:bg-indigo-100">📝 My Posts</a>
+                <a href="#logout" class="block px-4 py-2 text-red-600 hover:bg-red-100">🚪 Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Profile Section -->
+<div id="profileSection" class="min-h-screen bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Welcome, Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome Senodi!</h1>
+            <p class="text-gray-600">Manage your account and posts from here</p>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar -->
+            <div class="lg:w-64 flex-shrink-0">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <nav class="space-y-2">
+                        <button id="myPostsTab" class="sidebar-tab w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 bg-indigo-100 text-indigo-700 font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span>My Posts</span>
+                        </button>
+                        <button id="settingsTab" class="sidebar-tab w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>Settings</span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="flex-1">
+                <div class="bg-white rounded-xl shadow-md p-8">
+                    <!-- My Posts Content -->
+                    <div id="myPostsContent" class="content-section">
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-6">My Posts</h2>
+                        <div class="space-y-4">
+                            <!-- Sample Post -->
+                            <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                                            <span class="text-orange-600 text-xl">🐱</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold text-gray-900">Found Orange Tabby Cat</h3>
+                                            <p class="text-sm text-gray-500">Posted 2 days ago</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full font-medium">Active</span>
+                                </div>
+                                <p class="text-gray-600 mb-4">Found this friendly orange tabby near Central Park. Very social and appears well-cared for.</p>
+                                <div class="flex space-x-3">
+                                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition text-sm">Edit</button>
+                                    <button class="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-sm">Delete</button>
+                                </div>
+                            </div>
+
+                            <!-- Sample Post 2 -->
+                            <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            <span class="text-blue-600 text-xl">🐕</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold text-gray-900">Lost Golden Retriever - Max</h3>
+                                            <p class="text-sm text-gray-500">Posted 5 days ago</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-sm rounded-full font-medium">Resolved</span>
+                                </div>
+                                <p class="text-gray-600 mb-4">My golden retriever Max went missing from downtown area. He's very friendly and responds to his name.</p>
+                                <div class="flex space-x-3">
+                                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition text-sm">View</button>
+                                    <button class="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-sm">Archive</button>
+                                </div>
+                            </div>
+
+                            <!-- Empty State (when no posts) -->
+                            <div class="hidden text-center py-12" id="emptyState">
+                                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-medium text-gray-900 mb-2">No posts yet</h3>
+                                <p class="text-gray-500 mb-6">You haven't created any posts. Start helping pets find their way home!</p>
+                                <button class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">Create Your First Post</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Content -->
+                    <div id="settingsContent" class="content-section hidden">
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-6">Account Settings</h2>
+                        <div class="space-y-6">
+                            <!-- Profile Information -->
+                            <div class="border-b border-gray-200 pb-6">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Profile Information</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                        <input type="text" value="Senodi" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                        <input type="email" value="senodi@example.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                        <input type="tel" value="+1 (555) 123-4567" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                                        <input type="text" value="New York, NY" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Profile dropdown functionality
+    const profileBtn = document.getElementById('profileBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const profileSection = document.getElementById('profileSection');
+
+    // Toggle dropdown
+    profileBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function() {
+        dropdownMenu.classList.add('hidden');
+    });
+
+    // Handle profile link click
+    const profileLink = dropdownMenu.querySelector('a[href="#profile"]');
+    profileLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        profileSection.classList.remove('hidden');
+        dropdownMenu.classList.add('hidden');
+        // Hide other page content if any
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            document.body.style.overflow = 'auto';
+        }, 100);
+    });
+
+    // Sidebar tab functionality
+    const myPostsTab = document.getElementById('myPostsTab');
+    const settingsTab = document.getElementById('settingsTab');
+    const myPostsContent = document.getElementById('myPostsContent');
+    const settingsContent = document.getElementById('settingsContent');
+    const tabs = [myPostsTab, settingsTab];
+    const contents = [myPostsContent, settingsContent];
+
+    function switchTab(activeTab, activeContent) {
+        // Update tab styles
+        tabs.forEach(tab => {
+            tab.classList.remove('bg-indigo-100', 'text-indigo-700', 'font-medium');
+            tab.classList.add('text-gray-600', 'hover:bg-gray-100', 'hover:text-gray-900');
+        });
+
+        activeTab.classList.remove('text-gray-600', 'hover:bg-gray-100', 'hover:text-gray-900');
+        activeTab.classList.add('bg-indigo-100', 'text-indigo-700', 'font-medium');
+
+        // Update content visibility
+        contents.forEach(content => {
+            content.classList.add('hidden');
+        });
+        activeContent.classList.remove('hidden');
+    }
+
+    // Tab click handlers
+    myPostsTab.addEventListener('click', () => {
+        switchTab(myPostsTab, myPostsContent);
+    });
+
+    settingsTab.addEventListener('click', () => {
+        switchTab(settingsTab, settingsContent);
+    });
+
+    // Close profile section when clicking back (you can add a back button if needed)
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            profileSection.classList.add('hidden');
+        }
+    });
+
+    // Handle other dropdown links (placeholder functionality)
+    const myPostsLink = dropdownMenu.querySelector('a[href="#myposts"]');
+    const logoutLink = dropdownMenu.querySelector('a[href="#logout"]');
+
+    myPostsLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        profileSection.classList.remove('hidden');
+        switchTab(myPostsTab, myPostsContent);
+        dropdownMenu.classList.add('hidden');
+    });
+
+    logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Logout functionality would be implemented here');
+        dropdownMenu.classList.add('hidden');
+    });
+</script>
+</body>
+</html>
