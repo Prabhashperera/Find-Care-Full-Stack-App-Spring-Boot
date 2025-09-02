@@ -128,11 +128,11 @@ public class FoundController {
         return ResponseEntity.ok(new ApiResponseDto(500, "Internal Server Error", null));
     }
 
-    @GetMapping("filterpost")
+    @PostMapping("filterpost")
     public ResponseEntity<ApiResponseDto> filterPost(@RequestBody FilterPostsDto filterDto) {
         System.out.println("Reach Controller");
-        System.out.println(filterDto);
-        return ResponseEntity.ok(new ApiResponseDto(200, "Filter Posts Success", filterDto));
+        List<FoundPostDto> filteredPosts = foundPostService.filterPosts(filterDto);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Filter Posts Success", filteredPosts));
     }
 
 }

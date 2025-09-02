@@ -49,7 +49,15 @@ $("#filterForm").on("submit", function (e) {
     const district = document.getElementById("districtFilter").value;
     const city = document.getElementById("cityFilter").value;
 
-    loadPosts({petType, status, district, city});
+
+    let filterParams = {
+        petType: petType,
+        status: status,
+        district: district,
+        city: city
+    }
+
+    loadFilteredPosts(filterParams);
 
 });
 
@@ -57,11 +65,12 @@ $("#filterForm").on("submit", function (e) {
 function loadFilteredPosts(filter) {
     $.ajax({
         url: "http://localhost:8080/api/found/filterpost",
-        method: "GET",
+        method: "POST",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("accessToken")
         },
-        data: filter,
+        contentType: "application/json",  // tell Spring it's JSON
+        data: JSON.stringify(filter),
         success: function (response) {
             if (response.status === 200) {
                 console.log(response);

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FilterPostsDto {
     private String petType;
+    private String status;
     private String district;
     private String city;
-    private String status;
 }

@@ -1,14 +1,12 @@
 package org.app.findcarespringboot.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.app.findcarespringboot.dto.FilterPostsDto;
 import org.app.findcarespringboot.dto.FoundPostDto;
 import org.app.findcarespringboot.entity.FoundPost;
-import org.app.findcarespringboot.exception.DataNotFoundException;
 import org.app.findcarespringboot.exception.InternalServerErrorException;
 import org.app.findcarespringboot.repo.FoundPostRepo;
-import org.app.findcarespringboot.repo.UserRepo;
 import org.app.findcarespringboot.service.FoundPostService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,5 +81,34 @@ public class FoundPostServiceImpl implements FoundPostService {
                         foundPost.getStatus()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FoundPostDto> filterPosts(FilterPostsDto dto) {
+        List<FoundPost> foundPosts = foundPostRepo.filterPosts(
+                dto.getPetType(), dto.getStatus(), dto.getDistrict(), dto.getCity()
+        );
+        List<FoundPostDto> filteredPosts = new ArrayList<>();
+        for (FoundPost foundPost : foundPosts) {
+            FoundPostDto foundPostDto = new FoundPostDto(
+                    foundPost.getPostID(),
+                    foundPost.getUser() != null ? foundPost.getUser().getUsername() : null,
+                    foundPost.getPostDescription(),
+                    foundPost.getPetType(),
+                    foundPost.getBreed(),
+                    foundPost.getColor(),
+                    foundPost.getGender(),
+                    foundPost.getPhotoUrl(),
+                    foundPost.getDistrict(),
+                    foundPost.getCity(),
+                    foundPost.getLandmark(),
+                    foundPost.getFinderName(),
+                    foundPost.getContactNumber(),
+                    foundPost.getPostDate(),
+                    foundPost.getStatus()
+            );
+            filteredPosts.add(foundPostDto);
+        }
+        return filteredPosts;
     }
 }

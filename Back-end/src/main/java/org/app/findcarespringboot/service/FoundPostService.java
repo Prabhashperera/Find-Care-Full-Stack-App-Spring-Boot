@@ -1,5 +1,6 @@
 package org.app.findcarespringboot.service;
 
+import org.app.findcarespringboot.dto.FilterPostsDto;
 import org.app.findcarespringboot.dto.FoundPostDto;
 import org.app.findcarespringboot.entity.FoundPost;
 
@@ -11,4 +12,5 @@ public interface FoundPostService {
     String extractPublicIdFromCloudinary(String url);
     boolean delete(String postID);
     List<FoundPostDto> getAll();
+    List<FoundPostDto> filterPosts(FilterPostsDto filterDto);
 }
