@@ -22,7 +22,7 @@ public class LostPost {
     private String photoUrl;  // Cloudinary image URL
     private String district;   // Colombo, Galle, Kandy
     private String city;       // Moratuwa, Dehiwala, Maharagama
-    private String landmark;   // "Near bus stand", "Close to temple"
+    private String address;   // "Near bus stand", "Close to temple"
 
     private String finderName;
     private String contactNumber;
@@ -30,7 +30,7 @@ public class LostPost {
     private String postDate;
     private String status;
 
-    public LostPost(User user, String postDescription, String petType, String breed, String color, String gender, String photoUrl, String district, String city, String landmark, String finderName, String contactNumber, String postDate, String status) {
+    public LostPost(User user, String postDescription, String petType, String breed, String color, String gender, String photoUrl, String district, String city, String address, String finderName, String contactNumber, String postDate, String status) {
         this.user = user;
         this.postDescription = postDescription;
         this.petType = petType;
@@ -40,7 +40,7 @@ public class LostPost {
         this.photoUrl = photoUrl;
         this.district = district;
         this.city = city;
-        this.landmark = landmark;
+        this.address = address;
         this.finderName = finderName;
         this.contactNumber = contactNumber;
         this.postDate = postDate;

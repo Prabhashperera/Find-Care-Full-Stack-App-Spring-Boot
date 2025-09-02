@@ -11,7 +11,7 @@ public record LostPostDto(
         String photoUrl,
         String district,
         String city,
-        String landmark,
+        String address,
         String finderName,
         String contactNumber,
         String postDate,

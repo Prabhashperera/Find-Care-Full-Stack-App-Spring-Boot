@@ -3,7 +3,6 @@ package org.app.findcarespringboot.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.app.findcarespringboot.dto.FilterPostsDto;
 import org.app.findcarespringboot.dto.LostPostDto;
-import org.app.findcarespringboot.entity.FoundPost;
 import org.app.findcarespringboot.entity.LostPost;
 import org.app.findcarespringboot.exception.InternalServerErrorException;
 import org.app.findcarespringboot.repo.LostPostRepo;
@@ -75,7 +74,7 @@ public class LostPostServiceImpl implements LostPostService {
                         lostPost.getPhotoUrl(),
                         lostPost.getDistrict(),
                         lostPost.getCity(),
-                        lostPost.getLandmark(),
+                        lostPost.getAddress(),
                         lostPost.getFinderName(),
                         lostPost.getContactNumber(),
                         lostPost.getPostDate(),
@@ -102,7 +101,7 @@ public class LostPostServiceImpl implements LostPostService {
                     foundPost.getPhotoUrl(),
                     foundPost.getDistrict(),
                     foundPost.getCity(),
-                    foundPost.getLandmark(),
+                    foundPost.getAddress(),
                     foundPost.getFinderName(),
                     foundPost.getContactNumber(),
                     foundPost.getPostDate(),

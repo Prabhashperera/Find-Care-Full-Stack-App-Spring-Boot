@@ -17,9 +17,8 @@
     </div>
     <ul class="flex space-x-6 text-white">
       <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition">Home</a></li>
-      <li><a href="./foundPostSection.html" class="underline decoration-yellow-300 font-medium transition">Found Pets</a></li>
-      <li><a href="lostPets.html" class="hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
-      <li><a href="./makePostPage.html" class="hover:text-yellow-300 font-medium transition">Make Post</a></li>
+      <li><a href="./foundPostSection.html" class="font-medium transition">Found Pets</a></li>
+      <li><a href="./lostPostSection.html" class="underline decoration-yellow-300 hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
     </ul>
 
     <div class="relative">
@@ -122,9 +121,18 @@
   </div>
 </div>
 
+<!-- Floating Action Buttons Container -->
+<div class="fixed bottom-6 right-6 flex flex-col gap-3 cursor-pointer">
+  <!-- Create Post Button -->
+  <a href="./makeLostPostPage.html" id="createPostBtn"
+     class="flex items-center gap-2 bg-indigo-600 text-white font-medium rounded-full px-5 py-3 shadow-xl hover:bg-indigo-700 transition-all duration-300 hover:scale-105">
+    ✍️ <span class="hidden md:inline">Create Post</span>
+  </a>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="../js/main.js"></script>
-<script src="../js/foundPostSection.js"></script>
+<script src="../js/lostPostSection.js"></script>
 
 <script>
   const districtCities = {
