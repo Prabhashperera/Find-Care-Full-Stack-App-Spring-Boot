@@ -35,10 +35,12 @@ public class FoundController {
     public ResponseEntity<ApiResponseDto> savePost(@RequestPart("dto") String dto, @RequestPart("file") MultipartFile file) throws IOException {
         log.info("Saving post endpoint reached");
         String photoUrl = null;
+        System.out.println(dto);
 
         ObjectMapper mapper = new ObjectMapper();
         FoundPostDto foundPostDto = mapper.readValue(dto, FoundPostDto.class);
         User user = authenticationService.findById(foundPostDto.user());
+        System.out.println(foundPostDto.landmark() + "1111111");
 
         if (user == null) {
             return ResponseEntity.ok(
@@ -130,7 +132,6 @@ public class FoundController {
 
     @PostMapping("filterpost")
     public ResponseEntity<ApiResponseDto> filterPost(@RequestBody FilterPostsDto filterDto) {
-        System.out.println("Reach Controller");
         List<FoundPostDto> filteredPosts = foundPostService.filterPosts(filterDto);
         return ResponseEntity.ok(new ApiResponseDto(200, "Filter Posts Success", filteredPosts));
     }

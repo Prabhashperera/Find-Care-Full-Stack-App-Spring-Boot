@@ -14,10 +14,10 @@ public interface FoundPostRepo extends JpaRepository<FoundPost, Integer> {
     List<FoundPost> getFoundPostByPostID(int postID);
 
     @Query("SELECT f FROM FoundPost f " +
-            "WHERE (:petType IS NULL OR f.petType = :petType) " +
-            "AND (:status IS NULL OR f.status = :status) " +
-            "AND (:district IS NULL OR f.district = :district) " +
-            "AND (:city IS NULL OR f.city = :city)")
+            "WHERE (:petType IS NULL OR :petType = '' OR f.petType = :petType) " +
+            "AND (:status IS NULL OR :status = '' OR f.status = :status) " +
+            "AND (:district IS NULL OR :district = '' OR f.district = :district) " +
+            "AND (:city IS NULL OR :city = '' OR f.city = :city)")
     List<FoundPost> filterPosts(
             @Param("petType") String petType,
             @Param("status") String status,
