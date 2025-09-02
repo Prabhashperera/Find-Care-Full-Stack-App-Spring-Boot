@@ -18,7 +18,8 @@
     <ul class="flex space-x-6 text-white">
       <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition">Home</a></li>
       <li><a href="./foundPostSection.html" class="underline decoration-yellow-300 font-medium transition">Found Pets</a></li>
-      <li><a href="./lostPostSection.html" class="hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
+      <li><a href="lostPets.html" class="hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
+      <li><a href="./makePostPage.html" class="hover:text-yellow-300 font-medium transition">Make Post</a></li>
     </ul>
 
     <div class="relative">
@@ -52,7 +53,7 @@
 
 <!-- Filter Section -->
 <section class="max-w-7xl mx-auto px-6 py-6 bg-white shadow-md rounded-md mt-6">
-  <h2 class="text-2xl font-bold mb-4">Filter Found Pets</h2>
+  <h2 class="text-2xl font-bold mb-4">Filter Lost Pets</h2>
 
   <form id="filterForm">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -119,15 +120,6 @@
     <p id="modalStatus" class="text-gray-500 text-sm mb-2 font-semibold"></p>
     <p id="modalUser" class="text-gray-400 text-xs font-semibold"></p>
   </div>
-</div>
-
-<!-- Floating Action Buttons Container -->
-<div class="fixed bottom-6 right-6 flex flex-col gap-3 cursor-pointer">
-  <!-- Create Post Button -->
-  <a href="./makePostPage.html" id="createPostBtn"
-          class="flex items-center gap-2 bg-indigo-600 text-white font-medium rounded-full px-5 py-3 shadow-xl hover:bg-indigo-700 transition-all duration-300 hover:scale-105">
-    ✍️ <span class="hidden md:inline">Create Post</span>
-  </a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
