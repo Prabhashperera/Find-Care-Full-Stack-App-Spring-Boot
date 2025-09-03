@@ -85,14 +85,14 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                            <span>My Posts</span>
+                            <span>Found Posts</span>
                         </button>
-                        <button id="settingsTab" class="sidebar-tab w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                        <button id="lostPostsTab" class="sidebar-tab w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                            <span>Settings</span>
+                            <span>Lost Posts</span>
                         </button>
                     </nav>
                 </div>
@@ -120,34 +120,28 @@
                         </div>
                     </div>
 
-                    <!-- Settings Content -->
-                    <div id="settingsContent" class="content-section hidden">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-6">Account Settings</h2>
-                        <div class="space-y-6">
-                            <!-- Profile Information -->
-                            <div class="border-b border-gray-200 pb-6">
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Profile Information</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                                        <input type="text" value="Senodi" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                                        <input type="email" value="senodi@example.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                                        <input type="tel" value="+1 (555) 123-4567" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
-                                        <input type="text" value="New York, NY" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                                    </div>
-                                </div>
+                    <!-- Lost Posts Content -->
+                    <div id="lostPostsContent" class="content-section hidden">
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-6">Lost Posts</h2>
+                        <div class="space-y-4" id="lostPostsContainer">
+                            <!-- Lost posts will load here -->
+                        </div>
+                        <div class="hidden text-center py-12" id="emptyLostState">
+                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
                             </div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">No lost posts yet</h3>
+                            <p class="text-gray-500 mb-6">You haven’t created any lost posts.</p>
+                            <button class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                                Create a Lost Post
+                            </button>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -179,26 +173,15 @@
         dropdownMenu.classList.add('hidden');
     });
 
-    // Handle profile link click
-    const profileLink = dropdownMenu.querySelector('a[href="#profile"]');
-    profileLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        profileSection.classList.remove('hidden');
-        dropdownMenu.classList.add('hidden');
-        // Hide other page content if any
-        document.body.style.overflow = 'hidden';
-        setTimeout(() => {
-            document.body.style.overflow = 'auto';
-        }, 100);
-    });
-
     // Sidebar tab functionality
     const myPostsTab = document.getElementById('myPostsTab');
-    const settingsTab = document.getElementById('settingsTab');
+    const lostPostsTab = document.getElementById('lostPostsTab'); // rename this in HTML too later
+
     const myPostsContent = document.getElementById('myPostsContent');
-    const settingsContent = document.getElementById('settingsContent');
-    const tabs = [myPostsTab, settingsTab];
-    const contents = [myPostsContent, settingsContent];
+    const lostPostsContent = document.getElementById('lostPostsContent');
+
+    const tabs = [myPostsTab, lostPostsTab];
+    const contents = [myPostsContent, lostPostsContent];
 
     function switchTab(activeTab, activeContent) {
         // Update tab styles
@@ -222,27 +205,10 @@
         switchTab(myPostsTab, myPostsContent);
     });
 
-    settingsTab.addEventListener('click', () => {
-        switchTab(settingsTab, settingsContent);
+    lostPostsTab.addEventListener('click', () => {
+        switchTab(lostPostsTab, lostPostsContent);
     });
 
-    // Close profile section when clicking back (you can add a back button if needed)
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            profileSection.classList.add('hidden');
-        }
-    });
-
-    // Handle other dropdown links (placeholder functionality)
-    const myPostsLink = dropdownMenu.querySelector('a[href="#myposts"]');
-    const logoutLink = dropdownMenu.querySelector('a[href="#logout"]');
-
-    myPostsLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        profileSection.classList.remove('hidden');
-        switchTab(myPostsTab, myPostsContent);
-        dropdownMenu.classList.add('hidden');
-    });
 </script>
 </body>
 </html>
