@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetFinder - Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50 min-h-screen">
 <!-- Navbar -->
 <nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <div class="flex items-center space-x-3">
-            <span class="font-bold text-xl text-white">🐾 PetFinder</span>
+            <h1 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-paw mr-2"></i>FindCare
+            </h1>
         </div>
-        <ul class="flex space-x-6 text-white">
-            <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition">Home</a></li>
-            <li><a href="./foundPostSection.html" class="underline decoration-yellow-300 font-medium transition">Found Pets</a></li>
-            <li><a href="lostPets.html" class="hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
-            <li><a href="./makePostPage.html" class="hover:text-yellow-300 font-medium transition">Make Post</a></li>
+
+        <ul class="flex space-x-6 text-white hidden md:flex">
+            <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition-all duration-300">Home</a></li>
+            <li><a href="./foundPostSection.html" class="hover:text-yellow-300 font-medium transition-all duration-300">Found Posts</a></li>
+            <li><a href="./lostPostSection.html" class="hover:text-yellow-300 font-medium transition-all duration-300">Lost Posts</a></li>
         </ul>
+
+        <!-- Profile Dropdown -->
         <div class="relative">
             <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
+                <!-- Circle with profile icon -->
                 <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white">
+                    <!-- Heroicon: User -->
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none" viewBox="0 0 24 24"
                          stroke-width="1.8" stroke="currentColor"
@@ -31,12 +38,30 @@
                     </svg>
                 </div>
             </button>
+
+            <!-- Dropdown Menu -->
             <div id="dropdownMenu"
                  class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2">
-                <a href="#profile" class="block px-4 py-2 hover:bg-indigo-100">👤 Profile</a>
-                <a href="#myposts" class="block px-4 py-2 hover:bg-indigo-100">📝 My Posts</a>
-                <a href="#logout" class="block px-4 py-2 text-red-600 hover:bg-red-100">🚪 Logout</a>
+                <a href="./profilePage.html" class="block px-4 py-2 hover:bg-indigo-100 transition-all duration-200">👤 Profile</a>
+                <a href="./profilePage.html" class="block px-4 py-2 hover:bg-indigo-100 transition-all duration-200">📝 My Posts</a>
+                <a href="#logout" class="block px-4 py-2 text-red-600 hover:bg-red-100 transition-all duration-200">🚪 Logout</a>
             </div>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+            <button id="mobileMenuBtn" class="text-white">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-blue-600 shadow-lg">
+        <div class="px-6 py-4 space-y-2">
+            <a href="./homePage.html" class="block py-2 text-white hover:text-yellow-300 transition">Home</a>
+            <a href="./foundPostSection.html" class="block py-2 text-white hover:text-yellow-300 transition">Found Posts</a>
+            <a href="./lostPostSection.html" class="block py-2 text-white hover:text-yellow-300 transition">Lost Posts</a>
         </div>
     </div>
 </nav>

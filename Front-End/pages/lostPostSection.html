@@ -5,22 +5,28 @@
   <title>Found Pets</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
 </head>
 <body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen">
 
 <!-- Navbar -->
+<!-- Navbar -->
 <nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
     <div class="flex items-center space-x-3">
-      <span class="font-bold text-xl text-white">🐾 PetFinder</span>
-      <!--            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Pets_icon.svg" alt="Logo" class="h-10 w-10 rounded-full border-2 border-white">-->
+      <h1 class="text-xl font-bold text-white flex items-center">
+        <i class="fas fa-paw mr-2"></i>FindCare
+      </h1>
     </div>
-    <ul class="flex space-x-6 text-white">
-      <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition">Home</a></li>
-      <li><a href="./foundPostSection.html" class="font-medium transition">Found Pets</a></li>
-      <li><a href="./lostPostSection.html" class="underline decoration-yellow-300 hover:text-yellow-300 font-medium transition">Lost Pets</a></li>
+
+    <ul class="flex space-x-6 text-white hidden md:flex">
+      <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition-all duration-300">Home</a></li>
+      <li><a href="./foundPostSection.html" class="hover:text-yellow-300 font-medium transition-all duration-300">Found Posts</a></li>
+      <li><a href="./lostPostSection.html" class="hover:text-yellow-300 font-medium transition-all duration-300">Lost Posts</a></li>
     </ul>
 
+    <!-- Profile Dropdown -->
     <div class="relative">
       <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
         <!-- Circle with profile icon -->
@@ -39,15 +45,28 @@
       <!-- Dropdown Menu -->
       <div id="dropdownMenu"
            class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2">
-        <a href="#profile" class="block px-4 py-2 hover:bg-indigo-100">👤 Profile</a>
-        <a href="#myposts" class="block px-4 py-2 hover:bg-indigo-100">📝 My Posts</a>
-        <a href="#logout" class="block px-4 py-2 text-red-600 hover:bg-red-100">🚪 Logout</a>
+        <a href="./profilePage.html" class="block px-4 py-2 hover:bg-indigo-100 transition-all duration-200">👤 Profile</a>
+        <a href="./profilePage.html" class="block px-4 py-2 hover:bg-indigo-100 transition-all duration-200">📝 My Posts</a>
+        <a href="#logout" class="block px-4 py-2 text-red-600 hover:bg-red-100 transition-all duration-200">🚪 Logout</a>
       </div>
     </div>
 
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden">
+      <button id="mobileMenuBtn" class="text-white">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
   </div>
 
-
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden md:hidden bg-blue-600 shadow-lg">
+    <div class="px-6 py-4 space-y-2">
+      <a href="./homePage.html" class="block py-2 text-white hover:text-yellow-300 transition">Home</a>
+      <a href="./foundPostSection.html" class="block py-2 text-white hover:text-yellow-300 transition">Found Posts</a>
+      <a href="./lostPostSection.html" class="block py-2 text-white hover:text-yellow-300 transition">Lost Posts</a>
+    </div>
+  </div>
 </nav>
 
 <!-- Filter Section -->
