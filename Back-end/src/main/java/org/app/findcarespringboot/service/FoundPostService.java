@@ -13,4 +13,5 @@ public interface FoundPostService {
     boolean delete(String postID);
     List<FoundPostDto> getAll();
     List<FoundPostDto> filterPosts(FilterPostsDto filterDto);
+    List<FoundPostDto> loadPostsByUser(String userName);
 }

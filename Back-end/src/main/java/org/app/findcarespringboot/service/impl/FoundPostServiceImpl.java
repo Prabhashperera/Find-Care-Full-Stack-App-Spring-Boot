@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.app.findcarespringboot.dto.FilterPostsDto;
 import org.app.findcarespringboot.dto.FoundPostDto;
 import org.app.findcarespringboot.entity.FoundPost;
+import org.app.findcarespringboot.entity.User;
 import org.app.findcarespringboot.exception.InternalServerErrorException;
 import org.app.findcarespringboot.repo.FoundPostRepo;
+import org.app.findcarespringboot.repo.UserRepo;
 import org.app.findcarespringboot.service.FoundPostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class FoundPostServiceImpl implements FoundPostService {
     private final FoundPostRepo foundPostRepo;
+    private final UserRepo userRepo;
+    private final ModelMapper modelMapper;
 
     @Override
     public FoundPost save(FoundPost foundPost) {
@@ -110,5 +115,33 @@ public class FoundPostServiceImpl implements FoundPostService {
             filteredPosts.add(foundPostDto);
         }
         return filteredPosts;
+    }
+
+    @Override
+    public List<FoundPostDto> loadPostsByUser(String userName) {
+        List<User> userByUsername = userRepo.getUserByUsername(userName);
+        List<FoundPost> posts = foundPostRepo.getFoundPostsByUser(userByUsername.get(0));
+        List<FoundPostDto> dtos = new ArrayList<>();
+        for (FoundPost foundPost : posts) {
+            FoundPostDto foundPostDto = new FoundPostDto(
+                    foundPost.getPostID(),
+                    foundPost.getUser().getUsername(),     // assuming you want username here
+                    foundPost.getPostDescription(),
+                    foundPost.getPetType(),
+                    foundPost.getBreed(),
+                    foundPost.getColor(),
+                    foundPost.getGender(),
+                    foundPost.getPhotoUrl(),
+                    foundPost.getDistrict(),
+                    foundPost.getCity(),
+                    foundPost.getLandmark(),
+                    foundPost.getFinderName(),
+                    foundPost.getContactNumber(),
+                    foundPost.getPostDate(),
+                    foundPost.getStatus()
+            );
+            dtos.add(foundPostDto);
+        }
+        return dtos;
     }
 }

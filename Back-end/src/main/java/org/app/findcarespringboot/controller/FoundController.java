@@ -136,4 +136,10 @@ public class FoundController {
         return ResponseEntity.ok(new ApiResponseDto(200, "Filter Posts Success", filteredPosts));
     }
 
+    @GetMapping("loaduserpost/{userName}")
+    public ResponseEntity<ApiResponseDto> loadUserPosts(@PathVariable String userName) {
+        List<FoundPostDto> userPosts = foundPostService.loadPostsByUser(userName);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Load Posts Success", userPosts));
+    }
+
 }
