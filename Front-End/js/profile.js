@@ -165,3 +165,121 @@ function loadUserLostPosts() {
         }
     });
 }
+
+
+// DELETE FOUND POSTS
+$(document).on('click', '.deleteBtn', function() {
+    const postId = $(this).data('postid');
+    const button = $(this);
+
+    // Show modern confirmation popup
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "This post will be permanently deleted!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel',
+        didOpen: () => {
+            // Optional: you can focus confirm button automatically
+            Swal.getConfirmButton().focus();
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Show loading popup while AJAX runs
+            Swal.fire({
+                title: 'Deleting...',
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading()
+            });
+
+            // jQuery AJAX request
+            $.ajax({
+                url: `http://localhost:8080/api/found/delete/${postId}`,
+                method: 'DELETE',
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("accessToken")
+                },
+                success: function(response) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your post has been deleted.',
+                        'success'
+                    );
+                    button.closest('.postCard').remove();
+                    loadUserFoundPosts(); // refresh list if needed
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Error!',
+                        `Failed to delete post: ${xhr.responseText || error}`,
+                        'error'
+                    );
+                    console.error("Error deleting post:", xhr.responseText || error);
+                }
+            });
+        }
+    });
+});
+
+
+// DELETE LOST POSTS
+$(document).on('click', '.deleteBtn', function() {
+    const postId = $(this).data('postid');
+    const button = $(this);
+
+    // Show modern confirmation popup
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "This post will be permanently deleted!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel',
+        didOpen: () => {
+            // Optional: you can focus confirm button automatically
+            Swal.getConfirmButton().focus();
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Show loading popup while AJAX runs
+            Swal.fire({
+                title: 'Deleting...',
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading()
+            });
+
+            // jQuery AJAX request
+            $.ajax({
+                url: `http://localhost:8080/api/lost/delete/${postId}`,
+                method: 'DELETE',
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("accessToken")
+                },
+                success: function(response) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your post has been deleted.',
+                        'success'
+                    );
+                    button.closest('.postCard').remove();
+                    loadUserLostPosts(); // refresh list if needed
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire(
+                        'Error!',
+                        `Failed to delete post: ${xhr.responseText || error}`,
+                        'error'
+                    );
+                    console.error("Error deleting post:", xhr.responseText || error);
+                }
+            });
+        }
+    });
+});
+
+

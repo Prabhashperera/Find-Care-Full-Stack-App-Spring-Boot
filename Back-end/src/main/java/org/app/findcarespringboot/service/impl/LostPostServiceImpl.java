@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.app.findcarespringboot.dto.FilterPostsDto;
 import org.app.findcarespringboot.dto.LostPostDto;
 import org.app.findcarespringboot.entity.LostPost;
+import org.app.findcarespringboot.entity.User;
 import org.app.findcarespringboot.exception.InternalServerErrorException;
 import org.app.findcarespringboot.repo.LostPostRepo;
+import org.app.findcarespringboot.repo.UserRepo;
 import org.app.findcarespringboot.service.LostPostService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class LostPostServiceImpl implements LostPostService {
     private final LostPostRepo lostPostRepo;
+    private final UserRepo userRepo;
 
     @Override
     public LostPost save(LostPost lostPost) {
@@ -110,5 +113,33 @@ public class LostPostServiceImpl implements LostPostService {
             filteredPosts.add(lostPostDto);
         }
         return filteredPosts;
+    }
+
+    @Override
+    public List<LostPostDto> loadPostsByUser(String userName) {
+        List<User> userByUsername = userRepo.getUserByUsername(userName);
+        List<LostPost> posts = lostPostRepo.getLostPostByUser(userByUsername.get(0));
+        List<LostPostDto> dtos = new ArrayList<>();
+        for (LostPost lostPost : posts) {
+            LostPostDto lostPostDto = new LostPostDto(
+                    lostPost.getPostID(),
+                    lostPost.getUser().getUsername(),     // assuming you want username here
+                    lostPost.getPostDescription(),
+                    lostPost.getPetType(),
+                    lostPost.getBreed(),
+                    lostPost.getColor(),
+                    lostPost.getGender(),
+                    lostPost.getPhotoUrl(),
+                    lostPost.getDistrict(),
+                    lostPost.getCity(),
+                    lostPost.getAddress(),
+                    lostPost.getFinderName(),
+                    lostPost.getContactNumber(),
+                    lostPost.getPostDate(),
+                    lostPost.getStatus()
+            );
+            dtos.add(lostPostDto);
+        }
+        return dtos;
     }
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.app.findcarespringboot.dto.FilterPostsDto;
+import org.app.findcarespringboot.dto.FoundPostDto;
 import org.app.findcarespringboot.dto.LostPostDto;
 import org.app.findcarespringboot.entity.LostPost;
 import org.app.findcarespringboot.entity.User;
@@ -134,6 +135,12 @@ public class LostController {
     public ResponseEntity<ApiResponseDto> filterPost(@RequestBody FilterPostsDto filterDto) {
         List<LostPostDto> filteredPosts = lostPostService.filterPosts(filterDto);
         return ResponseEntity.ok(new ApiResponseDto(200, "Filter Posts Success", filteredPosts));
+    }
+
+    @GetMapping("loaduserpost/{userName}")
+    public ResponseEntity<ApiResponseDto> loadUserPosts(@PathVariable String userName) {
+        List<LostPostDto> userPosts = lostPostService.loadPostsByUser(userName);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Load Posts Success", userPosts));
     }
 
 }
