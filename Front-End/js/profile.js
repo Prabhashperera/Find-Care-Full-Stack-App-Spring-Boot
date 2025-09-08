@@ -64,7 +64,7 @@ function loadUserFoundPosts() {
         <!-- Actions -->
         <div class="flex space-x-3 mt-auto">
             <button class="editBtn px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition text-sm" data-postid="${post.postID}">Edit</button>
-            <button class="deleteBtn px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-sm" data-postid="${post.postID}">Delete</button>
+            <button class="foundDeleteBtn px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-sm" data-postid="${post.postID}">Delete</button>
         </div>
     </div>
 </div>
@@ -168,7 +168,7 @@ function loadUserLostPosts() {
 
 
 // DELETE FOUND POSTS
-$(document).on('click', '.deleteBtn', function() {
+$(document).on('click', '.foundDeleteBtn', function() {
     const postId = $(this).data('postid');
     const button = $(this);
 
