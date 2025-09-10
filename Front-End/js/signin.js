@@ -14,7 +14,8 @@ $("form").on("submit" , (e) => {
         type: "POST",
         success: function (data) {
             console.log(data.data);
-            localStorage.setItem("accessToken", data.data);
+            localStorage.setItem("accessToken", data.data.accessToken);
+            localStorage.setItem("refreshToken", data.data.refreshToken);
             localStorage.setItem("userName", userData.username);
             // maybe show a toast first?
             setTimeout(() => {
