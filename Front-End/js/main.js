@@ -19,6 +19,7 @@ function checkAndRefreshToken() {
                 console.error("Token check failed ❌", err.responseJSON);
                 console.log("VALIDATE TOKEN CALLED");
                 generateNewAccessToken()
+                window.location.reload();
             }
         })
     }else {

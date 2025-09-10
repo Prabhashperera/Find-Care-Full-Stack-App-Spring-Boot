@@ -1,6 +1,7 @@
 package org.app.findcarespringboot.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.app.findcarespringboot.dto.UserDto;
 import org.app.findcarespringboot.dto.response.ApiResponseDto;
 import org.app.findcarespringboot.entity.User;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("api/auth")
 @RequiredArgsConstructor
@@ -35,7 +37,7 @@ public class AuthenticationController {
 
     @PostMapping("login")
     public ResponseEntity<ApiResponseDto> userLogin(@RequestBody UserDto user) {
-        String token = authenticationService.loginUser(new User(user.getUsername(), user.getPassword()));
+        Map<String, String> token = authenticationService.loginUser(new User(user.getUsername(), user.getPassword()));
         return ResponseEntity.ok(
                 new ApiResponseDto(200, "Login Success", token) //Standard Api Response
         );
@@ -56,19 +58,15 @@ public class AuthenticationController {
         }
     }
 
-//    @PostMapping("/refresh-token")
-//    public ResponseEntity<?> refresh(@RequestBody Map<String, String> request) {
-//        String refreshToken = request.get("refreshToken");
-//
-//        if (jwtUtil.validateToken(refreshToken)) {
-//            String username = jwtUtil.extractUsername(refreshToken);
-//            String newAccessToken = jwtUtil.generateToken(username, 1000 * 60 * 1);
-//            System.out.println(newAccessToken + "aluth ekath hari");
-//            return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh token expired");
-//        }
-//    }
+    @PostMapping("/refresh")
+    public ResponseEntity<ApiResponseDto> refresh(@RequestBody RefreshRequest request) {
+        log.info("Refresh request: {}", request.refreshToken());
+        ApiResponseDto apiResponseDto = authenticationService.refreshToken(request);
+        return ResponseEntity.ok(apiResponseDto);
+    }
+
+    public record RefreshRequest(String refreshToken) {}
+
 
 }
 
