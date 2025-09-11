@@ -19,7 +19,6 @@ function checkAndRefreshToken() {
                 console.error("Token check failed ❌", err.responseJSON);
                 console.log("VALIDATE TOKEN CALLED");
                 generateNewAccessToken()
-                window.location.reload();
             }
         })
     }else {
@@ -40,6 +39,7 @@ function generateNewAccessToken() {
             if (data.status == 200) {
                 console.log("New Access Token:", data.data);
                 localStorage.setItem("accessToken", data.data); // overwrite old access token
+                window.location.reload();
             }
         },
         error: function(err) {
