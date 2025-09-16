@@ -19,11 +19,21 @@ $("form").on("submit" , (e) => {
             }, 1000); // delay 1s for smoother UX
         },
         error: function(xhr) {
-            if (xhr.status === 409) {
-                let msg = JSON.parse(xhr.responseText).message;
-                $(".username-error").removeClass("hidden").text(msg);
-            } else {
-                alert("Something went wrong: " + xhr.responseText);
+            try {
+                let response = JSON.parse(xhr.responseText);
+
+                if (xhr.status === 400) {
+                    if (response.username) {
+                        $(".username-error").removeClass("hidden").text(response.username);
+                    }
+                    if (response.password) {
+                        $(".password-error").removeClass("hidden").text(response.password);
+                    }
+                } else {
+                    alert(response.message || "Something went wrong!");
+                }
+            } catch (e) {
+                alert("Could not parse server response");
             }
         }
     });
