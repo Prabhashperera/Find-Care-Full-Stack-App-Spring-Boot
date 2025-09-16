@@ -3,6 +3,7 @@ package org.app.findcarespringboot.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.app.findcarespringboot.dto.FilterPostsDto;
 import org.app.findcarespringboot.dto.LostPostDto;
+import org.app.findcarespringboot.entity.FoundPost;
 import org.app.findcarespringboot.entity.LostPost;
 import org.app.findcarespringboot.entity.User;
 import org.app.findcarespringboot.exception.InternalServerErrorException;
@@ -141,5 +142,13 @@ public class LostPostServiceImpl implements LostPostService {
             dtos.add(lostPostDto);
         }
         return dtos;
+    }
+
+    @Override
+    public boolean changeStatus(int postId, String status) {
+        System.out.println("Service Hits" + postId);
+        Optional<LostPost> byId = lostPostRepo.findById(postId);
+        byId.ifPresent(foundPost -> foundPost.setStatus(status));
+        return true;
     }
 }

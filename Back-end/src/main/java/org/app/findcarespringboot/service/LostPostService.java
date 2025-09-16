@@ -16,4 +16,5 @@ public interface LostPostService {
     List<LostPostDto> getAll();
     List<LostPostDto> filterPosts(FilterPostsDto filterDto);
     List<LostPostDto> loadPostsByUser(String userName);
+    boolean changeStatus(int postId, String status);
 }
