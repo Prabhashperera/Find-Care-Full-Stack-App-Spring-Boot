@@ -63,7 +63,11 @@ function loadUserFoundPosts() {
 
         <!-- Actions -->
         <div class="flex space-x-3 mt-auto">
-            <button class="editBtn px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition text-sm" data-postid="${post.postID}">Edit</button>
+            <select class="statusDropdown px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition text-sm cursor-pointer" 
+            data-postid="${post.postID}">
+                <option value="Active" ${post.status === 'Active' ? 'selected' : ''}>Active</option>
+                <option value="Success" ${post.status === 'Success' ? 'selected' : ''}>Success</option>
+            </select>
             <button class="foundDeleteBtn px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-sm" data-postid="${post.postID}">Delete</button>
         </div>
     </div>
@@ -278,5 +282,30 @@ $(document).on('click', '.lostDeleteBtn', function() {
         }
     });
 });
+
+
+
+// Listen for change on any status dropdown
+$(document).on('change', '.statusDropdown', function() {
+    const postID = $(this).data('postid');
+    const status = $(this).val(); // get selected value
+
+    $.ajax({
+        url: "http://localhost:8080/api/found/changestatus",
+        method: "PUT",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("accessToken") // if using JWT
+        },
+        data: { postID, status },
+        success: function(response) {
+            console.log("Status changed ✅", response);
+            location.reload();
+        },
+        error: function(err) {
+            console.error("Failed to change status ❌", err);
+        }
+    });
+});
+
 
 

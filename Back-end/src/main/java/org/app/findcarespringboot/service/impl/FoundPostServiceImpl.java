@@ -1,6 +1,7 @@
 package org.app.findcarespringboot.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.app.findcarespringboot.dto.FilterPostsDto;
 import org.app.findcarespringboot.dto.FoundPostDto;
 import org.app.findcarespringboot.entity.FoundPost;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -143,5 +145,13 @@ public class FoundPostServiceImpl implements FoundPostService {
             dtos.add(foundPostDto);
         }
         return dtos;
+    }
+
+    @Override
+    public boolean changeStatus(int postId, String status) {
+        System.out.println("Service Hits" + postId);
+        Optional<FoundPost> byId = foundPostRepo.findById(postId);
+        byId.ifPresent(foundPost -> foundPost.setStatus(status));
+        return true;
     }
 }

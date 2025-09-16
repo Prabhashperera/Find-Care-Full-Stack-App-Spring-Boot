@@ -142,4 +142,11 @@ public class FoundController {
         return ResponseEntity.ok(new ApiResponseDto(200, "Load Posts Success", userPosts));
     }
 
+    @PutMapping("changestatus")
+    public ResponseEntity<ApiResponseDto> changePostStatus(@RequestParam String postID, @RequestParam String status) {
+        System.out.println("change Status Hit");
+        boolean changeStatus = foundPostService.changeStatus(Integer.parseInt(postID), status);
+        return ResponseEntity.ok(new ApiResponseDto(200, "Changed", changeStatus));
+    }
+
 }

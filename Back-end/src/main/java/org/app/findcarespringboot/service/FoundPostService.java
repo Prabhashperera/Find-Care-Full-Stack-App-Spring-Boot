@@ -14,4 +14,5 @@ public interface FoundPostService {
     List<FoundPostDto> getAll();
     List<FoundPostDto> filterPosts(FilterPostsDto filterDto);
     List<FoundPostDto> loadPostsByUser(String userName);
+    boolean changeStatus(int status, String s);
 }

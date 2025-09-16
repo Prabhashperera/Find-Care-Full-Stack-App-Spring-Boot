@@ -1,5 +1,6 @@
 package org.app.findcarespringboot.dto;
 
+
 public record LostPostDto(
         int postID,
         String user,
