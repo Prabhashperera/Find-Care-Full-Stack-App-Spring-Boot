@@ -28,7 +28,7 @@
                 <svg id="cameraIcon" xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 hover:text-blue-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M16 3v4M8 3v4m8 4l-4-4-4 4m0 0v6h8v-6" />
                 </svg>
-                <input type="file" id="petImage" class="hidden" accept="image/*">
+                <input required type="file" id="petImage" class="hidden" accept="image/*">
             </div>
         </label>
     </div>
@@ -37,13 +37,13 @@
     <form id="postForm" class="space-y-6">
         <div>
             <label class="block text-gray-700 font-medium mb-2">Pet Description</label>
-            <textarea placeholder="Describe the pet..." id="postDescription" class="w-full border border-gray-300 rounded-2xl px-4 py-3 h-28 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"></textarea>
+            <textarea required placeholder="Describe the pet..." id="postDescription" class="w-full border border-gray-300 rounded-2xl px-4 py-3 h-28 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"></textarea>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label class="block text-gray-700 font-medium mb-2">Pet Type</label>
-                <select id="petType" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                <select required id="petType" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
                     <option value="">Select Type</option>
                     <option value="Dog">Dog</option>
                     <option value="Cat">Cat</option>
@@ -73,7 +73,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
                 <label class="block text-gray-700 font-medium mb-2">District</label>
-                <select id="district" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                <select required id="district" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
                     <option value="">Select District</option>
                     <option value="Colombo">Colombo</option>
                     <option value="Kandy">Kandy</option>
@@ -81,7 +81,7 @@
             </div>
             <div>
                 <label class="block text-gray-700 font-medium mb-2">City</label>
-                <select id="city" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                <select required id="city" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
                     <option value="">Select City</option>
                 </select>
             </div>
@@ -98,7 +98,7 @@
 
         <div>
             <label class="block text-gray-700 font-medium mb-2">Contact Number</label>
-            <input id="contactNumber" type="number" placeholder="Enter contact number" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+            <input required id="contactNumber" type="number" placeholder="Enter contact number" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
         </div>
 
 <!--        <div>-->
