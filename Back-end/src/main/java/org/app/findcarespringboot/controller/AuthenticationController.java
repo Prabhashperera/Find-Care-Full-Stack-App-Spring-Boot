@@ -1,5 +1,6 @@
 package org.app.findcarespringboot.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.app.findcarespringboot.dto.UserDto;
@@ -23,7 +24,7 @@ public class AuthenticationController {
     private final JwtUtil jwtUtil;
 
     @PostMapping("signup")
-    public ResponseEntity<ApiResponseDto> userRegister(@RequestBody UserDto user) {
+    public ResponseEntity<ApiResponseDto> userRegister(@Valid @RequestBody UserDto user) {
         User savedUser = authenticationService.saveUser(new User(user.getUsername(), user.getPassword()));
         if (savedUser != null) {
             return ResponseEntity.ok(
