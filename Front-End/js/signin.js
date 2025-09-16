@@ -21,6 +21,15 @@ $("form").on("submit" , (e) => {
             setTimeout(() => {
                 window.location.href = "../pages/homePage.html";
             }, 1000); // delay 1s for smoother UX
+        },
+        error: function (xhr) {
+            console.error(xhr);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+            });
+            $("form")[0].reset();
         }
 
     })
