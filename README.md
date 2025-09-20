@@ -1,4 +1,4 @@
-Here’s a fully industry-standard README.md draft for your PetFinder platform (Find Care Fullstack App, Spring Boot), tailored to your requirements. You can copy-paste this into your repo and update the screenshots and demo video link when ready.
+<img width="1917" height="1080" alt="home page" src="https://github.com/user-attachments/assets/b1c643bf-dd24-4ff8-85c1-49c433b62626" />Here’s a fully industry-standard README.md draft for your PetFinder platform (Find Care Fullstack App, Spring Boot), tailored to your requirements. You can copy-paste this into your repo and update the screenshots and demo video link when ready.
 
 ---
 
@@ -25,13 +25,14 @@ PetFinder is a web application built to help communities report lost pets, post 
 > _Add your actual screenshots here. Example placeholders:_
 
 ### Home Page
-![Home Page](screenshots/homepage.png)
+<img width="1917" height="1080" alt="home page" src="https://github.com/user-attachments/assets/9e96251e-3f3f-4046-9dda-128fdb224577" />
 
-### Dashboard
-![Dashboard](screenshots/dashboard.png)
+### Profile
+<img width="1920" height="1080" alt="profile" src="https://github.com/user-attachments/assets/b6856f9a-a10c-4ccf-9fb3-a9d1ed253e5b" />
 
 ### Lost/Found Pet Form
-![Lost Pet Form](screenshots/lostpetform.png)
+<img width="1920" height="1080" alt="Found Posts Page" src="https://github.com/user-attachments/assets/0763f9a3-c1e3-4236-beea-172d9a83485f" />
+<img width="1920" height="1080" alt="Lost Posts Page" src="https://github.com/user-attachments/assets/21080eb1-10f0-4ca5-a270-4f292a4e8526" />
 
 ---
 
