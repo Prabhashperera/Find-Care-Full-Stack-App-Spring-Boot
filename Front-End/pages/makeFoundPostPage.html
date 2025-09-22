@@ -2,123 +2,452 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Pet Post</title>
+    <title>Create Pet Post - FindCare</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .form-container {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .floating-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-field {
+            background: rgba(248, 250, 252, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgb(99, 102, 241);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .image-upload-container {
+            background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+            border: 3px dashed rgba(99, 102, 241, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .image-upload-container:hover {
+            border-color: rgb(99, 102, 241);
+            background: linear-gradient(145deg, #eef2ff, #ddd6fe);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gradient-button:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(102, 126, 234, 0.4);
+        }
+
+        .floating-label {
+            transition: all 0.2s ease-in-out;
+            pointer-events: none;
+            background: white;
+            padding: 0 8px;
+            z-index: 10;
+        }
+
+        .form-group:focus-within .floating-label,
+        .form-group.has-content .floating-label {
+            transform: translateY(-32px) scale(0.85);
+            color: rgb(99, 102, 241);
+            font-weight: 600;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(.8);
+                opacity: 1;
+            }
+            80%, 100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .step-indicator {
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+        }
+
+        .step-indicator.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-r from-blue-100 to-purple-100 min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 overflow-x-hidden">
 
 <!-- Loader Overlay -->
-<div id="loader" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
-    <!-- Spinner -->
-    <div class="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-</div>
-
-
-
-<!-- Post Creation Container -->
-<div class="bg-white w-full max-w-4xl mx-auto p-8 rounded-3xl shadow-2xl transform transition hover:scale-105 duration-300">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-8 text-gray-800">Create a Pet Post</h2>
-
-    <!-- Pet Image Upload -->
-    <div class="flex justify-center mb-8">
-        <label for="petImage" class="cursor-pointer">
-            <div id="imagePreview" class="w-40 h-40 sm:w-48 sm:h-48 border-4 border-dashed border-gray-300 rounded-full flex items-center justify-center hover:border-blue-500 transition overflow-hidden bg-gray-100 relative">
-                <svg id="cameraIcon" xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 hover:text-blue-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M16 3v4M8 3v4m8 4l-4-4-4 4m0 0v6h8v-6" />
-                </svg>
-                <input required type="file" id="petImage" class="hidden" accept="image/*">
-            </div>
-        </label>
+<div id="loader" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div class="glass-card rounded-3xl p-8 text-center">
+        <div class="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p class="text-gray-700 font-medium">Creating your post...</p>
     </div>
-
-    <!-- Form -->
-    <form id="postForm" class="space-y-6">
-        <div>
-            <label class="block text-gray-700 font-medium mb-2">Pet Description</label>
-            <textarea required placeholder="Describe the pet..." id="postDescription" class="w-full border border-gray-300 rounded-2xl px-4 py-3 h-28 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"></textarea>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Pet Type</label>
-                <select required id="petType" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-                    <option value="">Select Type</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Breed</label>
-                <input id="breed" type="text" placeholder="Enter breed" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Color</label>
-                <input id="color" type="text" placeholder="Pet color" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Gender</label>
-                <select id="gender" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">District</label>
-                <select required id="district" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-                    <option value="">Select District</option>
-                    <option value="Colombo">Colombo</option>
-                    <option value="Kandy">Kandy</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">City</label>
-                <select required id="city" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-                    <option value="">Select City</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Landmark</label>
-                <input id="landmark" type="text" placeholder="Near bus stand, temple..." class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-            </div>
-        </div>
-
-        <div>
-            <label class="block text-gray-700 font-medium mb-2">Finder Name</label>
-            <input id="finderName" type="text" placeholder="Enter your name" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-        </div>
-
-        <div>
-            <label class="block text-gray-700 font-medium mb-2">Contact Number</label>
-            <input required id="contactNumber" type="number" placeholder="Enter contact number" class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-        </div>
-
-<!--        <div>-->
-<!--            <label class="block text-gray-700 font-medium mb-2">Status</label>-->
-<!--            <select class="w-full border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">-->
-<!--                <option value="">Select Status</option>-->
-<!--                <option value="Found">Found</option>-->
-<!--                <option value="Lost">Lost</option>-->
-<!--            </select>-->
-<!--        </div>-->
-
-        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-extrabold py-3 rounded-2xl hover:from-purple-500 hover:to-blue-500 transition shadow-lg">Create Post</button>
-        <!-- Back Button -->
-        <button type="button"
-                onclick="window.location.href='./foundPostSection.html'"
-                class="w-full bg-gray-200 text-gray-700 font-bold py-3 rounded-2xl hover:bg-gray-300 transition shadow-md mb-4">
-            ⬅ Found Posts
-        </button>
-    </form>
 </div>
+
+<!-- Modern Navbar (same as found pets page) -->
+<nav class="gradient-bg shadow-2xl sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                    <i class="fas fa-paw text-white text-xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-white">FindCare</h1>
+            </div>
+
+            <ul class="flex space-x-8 text-white hidden md:flex">
+                <li><a href="./homePage.html" class="hover:text-yellow-300 font-medium transition-all duration-300 pb-1 border-b-2 border-transparent hover:border-yellow-300">Home</a></li>
+                <li><a href="./foundPostSection.html" class="hover:text-yellow-300 font-medium transition-all duration-300 pb-1 border-b-2 border-transparent hover:border-yellow-300">Found Posts</a></li>
+                <li><a href="./lostPostSection.html" class="hover:text-yellow-300 font-medium transition-all duration-300 pb-1 border-b-2 border-transparent hover:border-yellow-300">Lost Posts</a></li>
+            </ul>
+
+            <!-- Profile Button -->
+            <div class="relative">
+                <button id="profileBtn" class="flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 hover:bg-white/30 transition-all duration-300">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 flex items-center justify-center text-white text-sm font-bold">
+                        P
+                    </div>
+                    <span class="user_Name_Profile text-white font-medium hidden sm:block">John</span>
+                    <i class="fas fa-chevron-down text-white text-xs"></i>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div id="dropdownMenu" class="hidden absolute right-0 mt-3 w-56 glass-card rounded-2xl shadow-2xl py-2">
+                    <a href="./profilePage.html" class="flex items-center px-4 py-3 hover:bg-white/20 transition-all duration-200 text-gray-700">
+                        <i class="fas fa-user mr-3 text-indigo-500"></i>Profile
+                    </a>
+                    <a href="./profilePage.html" class="flex items-center px-4 py-3 hover:bg-white/20 transition-all duration-200 text-gray-700">
+                        <i class="fas fa-edit mr-3 text-green-500"></i>My Posts
+                    </a>
+                    <hr class="my-2 border-white/20">
+                    <a href="#logout" class="flex items-center px-4 py-3 text-red-600 hover:bg-red-50/50 transition-all duration-200">
+                        <i class="fas fa-sign-out-alt mr-3"></i>Logout
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobileMenuBtn" class="text-white bg-white/20 rounded-lg p-2">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="relative overflow-hidden py-12">
+    <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10"></div>
+
+    <!-- Floating Elements -->
+    <div class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-20 animate-float"></div>
+    <div class="absolute top-32 right-20 w-16 h-16 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full opacity-20 animate-float" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full opacity-20 animate-float" style="animation-delay: 4s;"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+            Help a <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Lost Pet</span> Find Home
+        </h1>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Share details about a found pet and help reunite them with their loving family
+        </p>
+
+        <!-- Progress Steps -->
+        <div class="flex justify-center items-center space-x-4 mb-12">
+            <div class="step-indicator active rounded-full w-12 h-12 flex items-center justify-center text-white font-bold shadow-lg">
+                <i class="fas fa-camera text-lg"></i>
+            </div>
+            <div class="w-16 h-1 bg-gradient-to-r from-indigo-300 to-purple-300 rounded-full"></div>
+            <div class="step-indicator rounded-full w-12 h-12 flex items-center justify-center text-indigo-600 font-bold shadow-lg">
+                <i class="fas fa-edit text-lg"></i>
+            </div>
+            <div class="w-16 h-1 bg-gray-200 rounded-full"></div>
+            <div class="step-indicator rounded-full w-12 h-12 flex items-center justify-center text-indigo-600 font-bold shadow-lg">
+                <i class="fas fa-map-marker-alt text-lg"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Form Container -->
+<section class="max-w-4xl mx-auto px-6 pb-20">
+    <div class="form-container rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25px 25px, rgba(99, 102, 241, 0.3) 2px, transparent 0); background-size: 50px 50px;"></div>
+        </div>
+
+        <div class="relative">
+            <!-- Image Upload Section -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-camera text-indigo-600 mr-3"></i>
+                    Add Pet Photo
+                </h2>
+                <p class="text-gray-600 mb-8">A clear photo helps owners recognize their pet</p>
+
+                <label for="petImage" class="cursor-pointer block">
+                    <div id="imagePreview" class="image-upload-container w-64 h-64 mx-auto rounded-3xl flex items-center justify-center relative overflow-hidden group">
+                        <div id="uploadContent" class="text-center">
+                            <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i id="cameraIcon" class="fas fa-camera text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Upload Pet Photo</h3>
+                            <p class="text-gray-500 text-sm">Click to browse or drag & drop</p>
+                        </div>
+                        <input required type="file" id="petImage" class="hidden" accept="image/*">
+                    </div>
+                </label>
+            </div>
+
+            <!-- Pet Details Form -->
+            <form id="postForm" class="space-y-8">
+                <!-- Pet Description -->
+                <div class="form-group">
+                    <label class="block text-gray-700 font-semibold mb-3 flex items-center">
+                        <i class="fas fa-pen-alt text-indigo-500 mr-2"></i>
+                        Pet Description
+                    </label>
+                    <div class="relative">
+                        <textarea
+                                required
+                                id="postDescription"
+                                class="input-field w-full rounded-2xl px-6 py-4 h-32 resize-none focus:outline-none transition-all duration-300 text-gray-700"
+                                placeholder="Describe the pet in detail (color, size, breed, distinctive features...)"
+                                maxlength="500"
+                        ></textarea>
+                        <div class="absolute bottom-3 right-4 text-xs text-gray-400 bg-white px-2 rounded">
+                            <span id="charCount">0</span>/500
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pet Type & Breed -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-paw text-indigo-500 mr-2"></i>
+                            Pet Type
+                        </label>
+                        <div class="relative">
+                            <select required id="petType" class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none appearance-none cursor-pointer text-gray-700">
+                                <option value="">Select Pet Type</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
+                            </select>
+                            <div class="absolute top-1/2 right-4 transform -translate-y-1/2 text-indigo-500 pointer-events-none">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-dna text-purple-500 mr-2"></i>
+                            Breed
+                        </label>
+                        <div class="relative">
+                            <input
+                                    id="breed"
+                                    type="text"
+                                    class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none text-gray-700"
+                                    placeholder="e.g., Golden Retriever, Persian"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color & Gender -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-palette text-green-500 mr-2"></i>
+                            Color
+                        </label>
+                        <div class="relative">
+                            <input
+                                    id="color"
+                                    type="text"
+                                    class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none text-gray-700"
+                                    placeholder="e.g., Brown, Black & White"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-gray-700 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-venus-mars text-pink-500 mr-2"></i>
+                            Gender
+                        </label>
+                        <div class="relative">
+                            <select id="gender" class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none appearance-none cursor-pointer text-gray-700">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <div class="absolute top-1/2 right-4 transform -translate-y-1/2 text-indigo-500 pointer-events-none">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Details -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
+                        Location Details
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="form-group">
+                            <label class="block text-gray-700 font-medium mb-2">District</label>
+                            <div class="relative">
+                                <select required id="district" class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none appearance-none cursor-pointer text-gray-700">
+                                    <option value="">Select District</option>
+                                    <option value="Colombo">Colombo</option>
+                                    <option value="Kandy">Kandy</option>
+                                </select>
+                                <div class="absolute top-1/2 right-4 transform -translate-y-1/2 text-indigo-500 pointer-events-none">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="block text-gray-700 font-medium mb-2">City</label>
+                            <div class="relative">
+                                <select required id="city" class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none appearance-none cursor-pointer text-gray-700">
+                                    <option value="">Select City</option>
+                                </select>
+                                <div class="absolute top-1/2 right-4 transform -translate-y-1/2 text-indigo-500 pointer-events-none">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="block text-gray-700 font-medium mb-2">Landmark</label>
+                            <div class="relative">
+                                <input
+                                        id="landmark"
+                                        type="text"
+                                        class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none text-gray-700"
+                                        placeholder="Near bus stand, temple..."
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-user-circle text-green-600 mr-3"></i>
+                        Contact Information
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <div class="relative">
+                                <input
+                                        id="finderName"
+                                        type="text"
+                                        class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none text-gray-700"
+                                        placeholder="Your full name"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="block text-gray-700 font-medium mb-2">Contact Number <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <input
+                                        required
+                                        id="contactNumber"
+                                        type="tel"
+                                        class="input-field w-full rounded-2xl px-6 py-4 focus:outline-none text-gray-700"
+                                        placeholder="07XXXXXXXX"
+                                        pattern="[0-9]{10}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                    <button
+                            type="submit"
+                            class="gradient-button text-white font-bold py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center space-x-3 flex-1 relative"
+                    >
+                        <i class="fas fa-plus-circle text-xl"></i>
+                        <span>Create Pet Post</span>
+                    </button>
+
+                    <button
+                            type="button"
+                            onclick="window.location.href='./foundPostSection.html'"
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 border-2 border-gray-200 hover:border-gray-300"
+                    >
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Found Posts</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="../js/main.js"></script>
@@ -147,10 +476,10 @@
         }
     });
 
-    // Pet Image Preview
+    // Enhanced Pet Image Preview
     const petImageInput = document.getElementById('petImage');
     const imagePreview = document.getElementById('imagePreview');
-    const cameraIcon = document.getElementById('cameraIcon');
+    const uploadContent = document.getElementById('uploadContent');
 
     petImageInput.addEventListener('change', function() {
         const file = this.files[0];
@@ -160,11 +489,90 @@
                 imagePreview.style.backgroundImage = `url(${e.target.result})`;
                 imagePreview.style.backgroundSize = 'cover';
                 imagePreview.style.backgroundPosition = 'center';
-                cameraIcon.style.display = 'none';
+                uploadContent.style.display = 'none';
+
+                // Add overlay for re-upload
+                const overlay = document.createElement('div');
+                overlay.className = 'absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center cursor-pointer';
+                overlay.innerHTML = '<div class="text-white text-center"><i class="fas fa-camera text-2xl mb-2"></i><p class="text-sm">Change Photo</p></div>';
+                imagePreview.appendChild(overlay);
             }
             reader.readAsDataURL(file);
         }
     });
+
+    // Character Counter
+    const descriptionTextarea = document.getElementById('postDescription');
+    const charCount = document.getElementById('charCount');
+
+    descriptionTextarea.addEventListener('input', function() {
+        const count = this.value.length;
+        charCount.textContent = count;
+
+        if(count > 450) {
+            charCount.style.color = '#ef4444';
+        } else if(count > 400) {
+            charCount.style.color = '#f59e0b';
+        } else {
+            charCount.style.color = '#9ca3af';
+        }
+    });
+
+    // Floating Labels (simplified since we removed them)
+    const formInputs = document.querySelectorAll('input, select, textarea');
+
+    formInputs.forEach(input => {
+        // Add focus effects
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+
+        input.addEventListener('blur', () => {
+            input.parentElement.classList.remove('focused');
+        });
+    });
+
+    // Profile dropdown
+    const profileBtn = document.getElementById("profileBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    profileBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("hidden");
+    });
+
+    window.addEventListener("click", () => {
+        dropdownMenu.classList.add("hidden");
+    });
+
+    // Form validation with visual feedback
+    // Form validation with visual feedback
+    const form = document.getElementById('postForm');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Show loader
+        document.getElementById('loader').classList.remove('hidden');
+
+        // Simulate form submission
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden');
+
+            // Show success message
+            if(typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Your pet post has been created successfully.',
+                    icon: 'success',
+                    confirmButtonColor: '#667eea',
+                    confirmButtonText: 'View Posts'
+                }).then(() => {
+                    window.location.href = './foundPostSection.html';
+                });
+            } else {
+                alert('Post created successfully!');
+                window.location.href = './foundPostSection.html';
+            }
+        }, 1500);  // ✅ close setTimeout
+    }); // ✅ close submit listener
 </script>
-</body>
-</html>
