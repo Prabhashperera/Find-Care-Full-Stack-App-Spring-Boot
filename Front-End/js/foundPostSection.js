@@ -2,6 +2,7 @@ $(document).ready(function () {
     loadPosts();
 });
 
+
 function loadPosts() {
     $.ajax({
         url: "http://localhost:8080/api/found/getall",
