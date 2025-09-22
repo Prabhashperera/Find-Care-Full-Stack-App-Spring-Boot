@@ -5,61 +5,481 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FindCare - Sign Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: url('https://images.squarespace-cdn.com/content/v1/5d1bf13a3f8e880001289eeb/af672b03-46e4-4a52-ab37-89e0bc042463/beyza-yurtkuran-3Ex793Z3Vx0-unsplash.jpg') no-repeat center center fixed;
-            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
         }
+
+        /* Video Background Styles */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+            rgba(30, 58, 138, 0.9) 0%,
+            rgba(17, 24, 39, 0.85) 30%,
+            rgba(30, 64, 175, 0.9) 70%,
+            rgba(17, 24, 39, 0.85) 100%);
+            z-index: -1;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Animated particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(236, 72, 153, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            top: 15%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            top: 70%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            bottom: 25%;
+            left: 75%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(4) {
+            width: 18px;
+            height: 18px;
+            top: 45%;
+            left: 85%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(5) {
+            width: 22px;
+            height: 22px;
+            bottom: 15%;
+            right: 65%;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(6) {
+            width: 16px;
+            height: 16px;
+            top: 25%;
+            right: 25%;
+            animation-delay: 5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-35px) rotate(180deg);
+                opacity: 0.7;
+            }
+        }
+
         .glass {
-            background: rgba(0, 0, 0, 0.7); /* dark glass instead of white */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(31, 41, 55, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+            max-height: 95vh;
+            overflow-y: auto;
         }
+
+        .glass::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .glass::-webkit-scrollbar-track {
+            background: rgba(55, 65, 81, 0.3);
+            border-radius: 10px;
+        }
+
+        .glass::-webkit-scrollbar-thumb {
+            background: rgba(236, 72, 153, 0.5);
+            border-radius: 10px;
+        }
+
+        .glass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg,
+            rgba(236, 72, 153, 0.05) 0%,
+            rgba(59, 130, 246, 0.05) 100%);
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        .glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        input {
+            transition: all 0.3s ease;
+            background: rgba(55, 65, 81, 0.8) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        input:focus {
+            transform: scale(1.02);
+            background: rgba(55, 65, 81, 0.9) !important;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+        }
+
+        input::placeholder {
+            color: #9ca3af;
+            opacity: 0.7;
+        }
+
+        button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
+        }
+
+        .form-field {
+            position: relative;
+        }
+
+        .form-field::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #ec4899, #3b82f6);
+            transition: width 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .form-field:hover::before {
+            width: 100%;
+        }
+
+        /* Title glow effect */
+        .title-glow {
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from {
+                text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(236, 72, 153, 0.8);
+            }
+        }
+
+        /* Error message styling */
+        .error-message {
+            background: rgba(220, 38, 127, 0.1);
+            border: 1px solid rgba(220, 38, 127, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .video-overlay {
+                background: linear-gradient(135deg,
+                rgba(30, 58, 138, 0.95) 0%,
+                rgba(17, 24, 39, 0.9) 30%,
+                rgba(30, 64, 175, 0.95) 70%,
+                rgba(17, 24, 39, 0.9) 100%);
+            }
+
+            .glass {
+                max-height: 98vh;
+            }
+        }
+
+        /* Enhanced focus states */
+        .focused::before {
+            width: 100% !important;
+        }
+
+        /* Password strength indicator */
+        .password-strength {
+            height: 4px;
+            background: rgba(55, 65, 81, 0.5);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { background: #ef4444; width: 25%; }
+        .strength-fair { background: #f59e0b; width: 50%; }
+        .strength-good { background: #10b981; width: 75%; }
+        .strength-strong { background: #059669; width: 100%; }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
 
-<div class="glass w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-6 sm:p-8 lg:p-12 shadow-2xl">
-    <div class="text-center mb-6">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-pink-400">🐾 FindCare</h1>
-        <p class="text-gray-300 text-sm sm:text-base lg:text-lg">Join the community & help pets find their way home</p>
+<!-- Video Background -->
+<div class="video-background">
+    <video autoplay muted loop playsinline>
+        <source src="../assests/bgvideo.mp4" type="video/mp4">
+        <source src="../assests/bgvideo.mp4" type="video/mp4">
+        <source src="../assests/bgvideo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<!-- Video Overlay -->
+<div class="video-overlay"></div>
+
+<!-- Animated Particles -->
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<div class="glass w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-6 sm:p-8 lg:p-12">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-pink-400 title-glow flex items-center justify-center">
+            <span class="mr-3"></span> FindCare
+        </h1>
+        <p class="text-gray-300 text-sm sm:text-base lg:text-lg mt-2 opacity-90">Join the community & help pets find their way home</p>
     </div>
 
     <form action="form" method="POST" class="space-y-4 sm:space-y-5">
-        <div>
-            <label class="block text-gray-200 text-sm mb-2">Full Name</label>
-            <input type="text" required placeholder="John Doe" class="full_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+        <div class="form-field">
+            <label class="block text-gray-200 text-sm mb-2 font-medium">Full Name</label>
+            <input type="text" required placeholder="John Doe" class="full_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 transition duration-300">
         </div>
-        <div>
-            <label class="block text-gray-200 text-sm mb-2">User Name</label>
-            <input type="text" required placeholder="johndoe01" name="user_Name" class="user_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
-            <p class="username-error text-red-500 text-sm mt-1 hidden">Username already exists, try another.</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-gray-200 text-sm mb-2">Password</label>
-                <input type="password" required placeholder="••••••••" name="user_Password" class="user_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
-                <p class="password-error text-red-500 text-sm mt-1 hidden">Username already exists, try another.</p>
 
+        <div class="form-field">
+            <label class="block text-gray-200 text-sm mb-2 font-medium">User Name</label>
+            <input type="text" required placeholder="johndoe01" name="user_Name" class="user_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 transition duration-300">
+            <p class="username-error text-red-400 text-sm mt-1 hidden error-message">Username already exists, try another.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="form-field">
+                <label class="block text-gray-200 text-sm mb-2 font-medium">Password</label>
+                <input type="password" required placeholder="••••••••" name="user_Password" class="user_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 transition duration-300" id="password">
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="strengthBar"></div>
+                </div>
+                <p class="password-error text-red-400 text-sm mt-1 hidden error-message">Password must be at least 6 characters long.</p>
             </div>
-            <div>
-                <label class="block text-gray-200 text-sm mb-2">Confirm Password</label>
-                <input type="password" required placeholder="••••••••" name="confirm_Password" class="confirm_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400">
+
+            <div class="form-field">
+                <label class="block text-gray-200 text-sm mb-2 font-medium">Confirm Password</label>
+                <input type="password" required placeholder="••••••••" name="confirm_Password" class="confirm_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 transition duration-300" id="confirmPassword">
+                <p class="confirm-error text-red-400 text-sm mt-1 hidden error-message">Passwords do not match.</p>
             </div>
         </div>
-        <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 transition text-white py-2 sm:py-3 rounded-xl font-semibold shadow-lg text-sm sm:text-base lg:text-lg">Sign Up</button>
+
+        <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transition text-white py-2 sm:py-3 rounded-xl font-semibold shadow-lg text-sm sm:text-base lg:text-lg relative z-10">
+            Create Account
+        </button>
     </form>
 
-    <p class="mt-6 text-center text-gray-400 text-xs sm:text-sm lg:text-base">
-        Already have an account? <a href="./signin.html" class="text-pink-400 hover:underline">Login</a>
+    <p class="mt-6 text-center text-gray-300 text-xs sm:text-sm lg:text-base">
+        Already have an account?
+        <a href="./signin.html" class="text-pink-400 hover:text-pink-300 transition duration-200 font-medium">Sign In</a>
     </p>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    // Video background optimization
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.querySelector('.video-background video');
+
+        if (video) {
+            // Pause video on mobile to save bandwidth
+            if (window.innerWidth <= 768) {
+                video.pause();
+                video.style.display = 'none';
+            }
+
+            // Handle video loading errors gracefully
+            video.addEventListener('error', function() {
+                console.log('Video failed to load, using gradient background');
+                const videoContainer = document.querySelector('.video-background');
+                videoContainer.style.display = 'none';
+            });
+
+            // Optimize video playback
+            video.addEventListener('loadeddata', function() {
+                video.playbackRate = 0.8; // Slightly slower for a more calm effect
+            });
+        }
+
+        // Enhanced form interactions
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+            });
+        });
+
+        // Password strength checker
+        const passwordInput = document.getElementById('password');
+        const strengthBar = document.getElementById('strengthBar');
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+            updateStrengthBar(strength);
+        });
+
+        // Password confirmation checker
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const confirmError = document.querySelector('.confirm-error');
+
+        function checkPasswordMatch() {
+            if (confirmPasswordInput.value && passwordInput.value !== confirmPasswordInput.value) {
+                confirmError.classList.remove('hidden');
+            } else {
+                confirmError.classList.add('hidden');
+            }
+        }
+
+        confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+        passwordInput.addEventListener('input', checkPasswordMatch);
+
+        // Add subtle animation to the form on load
+        setTimeout(() => {
+            document.querySelector('.glass').style.opacity = '1';
+            document.querySelector('.glass').style.transform = 'translateY(0)';
+        }, 100);
+    });
+
+    // Password strength calculation
+    function calculatePasswordStrength(password) {
+        let strength = 0;
+        if (password.length >= 6) strength += 1;
+        if (password.length >= 10) strength += 1;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength += 1;
+        if (/\d/.test(password)) strength += 1;
+        if (/[^a-zA-Z\d]/.test(password)) strength += 1;
+        return Math.min(strength, 4);
+    }
+
+    function updateStrengthBar(strength) {
+        const strengthBar = document.getElementById('strengthBar');
+        const classes = ['strength-weak', 'strength-fair', 'strength-good', 'strength-strong'];
+
+        // Remove all strength classes
+        classes.forEach(cls => strengthBar.classList.remove(cls));
+
+        // Add appropriate strength class
+        if (strength > 0) {
+            strengthBar.classList.add(classes[Math.min(strength - 1, 3)]);
+        } else {
+            strengthBar.style.width = '0%';
+        }
+    }
+
+    // Initialize form with subtle entrance animation
+    document.querySelector('.glass').style.opacity = '0';
+    document.querySelector('.glass').style.transform = 'translateY(20px)';
+    document.querySelector('.glass').style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+</script>
+
+<!-- Include your existing signup.js -->
 <script src="../js/signup.js"></script>
 </body>
 </html>

@@ -5,50 +5,346 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FindCare - Sign In</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background: url('https://images.unsplash.com/photo-1558788353-f76d92427f16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1774&q=80') no-repeat center center fixed;
-      background-size: cover;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
     }
+
+    /* Video Background Styles */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    .video-background video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg,
+      rgba(30, 58, 138, 0.9) 0%,
+      rgba(17, 24, 39, 0.85) 30%,
+      rgba(30, 64, 175, 0.9) 70%,
+      rgba(17, 24, 39, 0.85) 100%);
+      z-index: -1;
+      backdrop-filter: blur(2px);
+    }
+
+    /* Animated particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(34, 211, 238, 0.3);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) {
+      width: 20px;
+      height: 20px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      width: 15px;
+      height: 15px;
+      top: 60%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .particle:nth-child(3) {
+      width: 25px;
+      height: 25px;
+      bottom: 30%;
+      left: 70%;
+      animation-delay: 4s;
+    }
+
+    .particle:nth-child(4) {
+      width: 18px;
+      height: 18px;
+      top: 40%;
+      left: 80%;
+      animation-delay: 1s;
+    }
+
+    .particle:nth-child(5) {
+      width: 22px;
+      height: 22px;
+      bottom: 20%;
+      right: 60%;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(-30px) rotate(180deg);
+        opacity: 0.7;
+      }
+    }
+
     .glass {
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(31, 41, 55, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-radius: 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glass::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg,
+      rgba(34, 211, 238, 0.05) 0%,
+      rgba(59, 130, 246, 0.05) 100%);
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    .glass:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    input {
+      transition: all 0.3s ease;
+      background: rgba(55, 65, 81, 0.8) !important;
+      backdrop-filter: blur(10px);
+    }
+
+    input:focus {
+      transform: scale(1.02);
+      background: rgba(55, 65, 81, 0.9) !important;
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+      opacity: 0.7;
+    }
+
+    button {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+      z-index: -1;
+    }
+
+    button:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.4);
+    }
+
+    .form-field {
+      position: relative;
+    }
+
+    .form-field::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #22d3ee, #3b82f6);
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+
+    .form-field:hover::before {
+      width: 100%;
+    }
+
+    /* Title glow effect */
+    .title-glow {
+      text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+      animation: pulse-glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      from {
+        text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+      }
+      to {
+        text-shadow: 0 0 30px rgba(34, 211, 238, 0.8);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .video-overlay {
+        background: linear-gradient(135deg,
+        rgba(30, 58, 138, 0.95) 0%,
+        rgba(17, 24, 39, 0.9) 30%,
+        rgba(30, 64, 175, 0.95) 70%,
+        rgba(17, 24, 39, 0.9) 100%);
+      }
     }
   </style>
-  </head>
+</head>
 <body class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
 
-<div class="glass w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-6 sm:p-8 lg:p-12 shadow-2xl">
-  <div class="text-center mb-6">
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-teal-400">🐾 FindCare</h1>
-    <p class="text-gray-300 text-sm sm:text-base lg:text-lg">Welcome back! Sign in to continue caring for pets</p>
+<!-- Video Background -->
+<div class="video-background">
+  <video autoplay muted loop playsinline>
+    <source src="../assests/bgvideo.mp4" type="video/mp4">
+    <source src="../assests/bgvideo.mp4" type="video/mp4">
+    <source src="../assests/bgvideo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<!-- Video Overlay -->
+<div class="video-overlay"></div>
+
+<!-- Animated Particles -->
+<div class="particles">
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+</div>
+
+<div class="glass w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-6 sm:p-8 lg:p-12">
+  <div class="text-center mb-8">
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-cyan-300 title-glow">FindCare</h1>
+    <p class="text-gray-300 text-sm sm:text-base lg:text-lg mt-2 opacity-90">Welcome back! Sign in to continue caring for pets</p>
   </div>
-  <form action="form" method="POST" class="space-y-5">
-    <div>
-      <label class="block text-gray-200 text-sm mb-2">User Name</label>
-      <input required type="text" placeholder="prabash01" class="user_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400">
-    </div>
-    <div>
-      <label class="block text-gray-200 text-sm mb-2">Password</label>
-      <input required type="password" placeholder="••••••••" class="user_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400">
+
+  <form action="form" method="POST" class="space-y-6">
+    <div class="form-field">
+      <label class="block text-gray-200 text-sm mb-2 font-medium">User Name</label>
+      <input required type="text" placeholder="prabash01" class="user_Name w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300">
     </div>
 
-    <button type="submit" class="w-full bg-teal-500 hover:bg-teal-600 transition text-white py-2 sm:py-3 rounded-xl font-semibold shadow-lg text-sm sm:text-base lg:text-lg">Sign In</button>
+    <div class="form-field">
+      <label class="block text-gray-200 text-sm mb-2 font-medium">Password</label>
+      <input required type="password" placeholder="••••••••" class="user_Password w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300">
+    </div>
+
+    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition text-white py-3 rounded-lg font-semibold shadow-lg text-sm sm:text-base lg:text-lg relative z-10">
+      Sign In
+    </button>
   </form>
 
-  <p class="mt-6 text-center text-gray-400 text-xs sm:text-sm lg:text-base">
-    Don’t have an account? <a href="./signup.html" class="text-teal-300 hover:underline">Sign Up</a>
+  <p class="mt-6 text-center text-gray-300 text-xs sm:text-sm lg:text-base">
+    Don't have an account?
+    <a href="./signup.html" class="text-cyan-300 hover:text-cyan-200 transition duration-200 font-medium">Sign Up</a>
   </p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="../js/signin.js"></script>
+<script>
+  // Video background optimization
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('.video-background video');
 
+    if (video) {
+      // Pause video on mobile to save bandwidth
+      if (window.innerWidth <= 768) {
+        video.pause();
+        video.style.display = 'none';
+      }
+
+      // Handle video loading errors gracefully
+      video.addEventListener('error', function() {
+        console.log('Video failed to load, using gradient background');
+        const videoContainer = document.querySelector('.video-background');
+        videoContainer.style.display = 'none';
+      });
+
+      // Optimize video playback
+      video.addEventListener('loadeddata', function() {
+        video.playbackRate = 0.8; // Slightly slower for a more calm effect
+      });
+    }
+
+    // Enhanced form interactions
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentElement.classList.add('focused');
+      });
+
+      input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('focused');
+      });
+    });
+
+    // Add subtle animation to the form on load
+    setTimeout(() => {
+      document.querySelector('.glass').style.opacity = '1';
+      document.querySelector('.glass').style.transform = 'translateY(0)';
+    }, 100);
+  });
+
+  // Initialize form with subtle entrance animation
+  document.querySelector('.glass').style.opacity = '0';
+  document.querySelector('.glass').style.transform = 'translateY(20px)';
+  document.querySelector('.glass').style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+</script>
+
+<!-- Include your existing signin.js -->
+<script src="../js/signin.js"></script>
 </body>
 </html>
