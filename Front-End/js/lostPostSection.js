@@ -278,6 +278,7 @@
 
 $(document).ready(function () {
     loadPosts();
+    $(".user_Name_Profile").text(localStorage.getItem("userName"));
 });
 
 function loadPosts() {
