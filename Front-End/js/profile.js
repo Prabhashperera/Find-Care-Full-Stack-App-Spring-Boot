@@ -1,6 +1,7 @@
 // Loading FOUND POSTS
 $(document).ready(function () {
     console.log("DOC READY")
+    $(".user_Name_Profile").text(localStorage.getItem("userName"));
     loadUserFoundPosts();
 });
 function loadUserFoundPosts() {
@@ -333,5 +334,6 @@ $(document).on('change', '.lostStatusDropdown', function() {
         }
     });
 });
+
 
 
