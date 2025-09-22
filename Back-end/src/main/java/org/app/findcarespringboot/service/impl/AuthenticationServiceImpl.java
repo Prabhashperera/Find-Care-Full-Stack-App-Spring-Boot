@@ -47,7 +47,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (foundUser != null) {
             boolean matches = passwordEncoder.matches(user.getPassword(), foundUser.getPassword());
             if (matches) {
-                String accessToken = jwtUtil.generateToken(user.getUsername(), 1000L * 60); // set this LABELLLLL FIX THIS
+                String accessToken = jwtUtil.generateToken(user.getUsername(), 1000L * 60 * 60); // set this LABELLLLL FIX THIS
                 log.info("Generated Access Token : {}", accessToken);
                 String refreshToken = jwtUtil.generateToken(user.getUsername(), 1000L * 60 * 60 * 24 * 7); // 7 days
                 return Map.of("accessToken", accessToken , "refreshToken" , refreshToken);//Generating JWT Token
@@ -64,7 +64,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
 
         String username = jwtUtil.extractUsername(request.refreshToken());
-        String newAccessToken = jwtUtil.generateToken(username, 1000L * 60); // 1 min
+        String newAccessToken = jwtUtil.generateToken(username, 1000L * 60 * 60); // 1 min
 
         log.info("Generated new Access Token : {}", newAccessToken);
         return new ApiResponseDto(200, "Refresh token generated", newAccessToken);
