@@ -108,10 +108,7 @@ npx http-server ./frontend
 ---
 
 ## 🎬 Demo Video
-
-> _Add your YouTube link here (use a descriptive title like “PetFinder Platform Demo – [Your Name]”):_
-
-[![Demo Video](screenshots/demo-thumbnail.png)](YOUR_YOUTUBE_LINK)
+https://youtu.be/FB5MDFlB77Y
 
 ---
 
