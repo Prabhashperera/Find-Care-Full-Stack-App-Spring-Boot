@@ -252,6 +252,17 @@
 <!-- AOS Init -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    // Run this on page load
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+
+    if (token) {
+        localStorage.setItem("accessToken", token);
+        // ✅ Optionally, clean up URL so token isn't visible
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+</script>
 <script src="../js/main.js"></script>
 <script src="../js/logout.js"></script>
 

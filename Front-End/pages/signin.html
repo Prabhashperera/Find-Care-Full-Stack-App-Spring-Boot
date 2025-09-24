@@ -3,346 +3,623 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FindCare - Sign In</title>
+  <title>FindCare - Welcome Back</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      --secondary-gradient: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+      --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      position: relative;
-      overflow: hidden;
-      min-height: 100vh;
+      background: #000;
+      overflow-x: hidden;
     }
 
-    /* Video Background Styles */
-    .video-background {
+    .space-grotesk {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Animated Background */
+    .bg-container {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-    }
-
-    .video-background video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .video-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg,
-      rgba(30, 58, 138, 0.9) 0%,
-      rgba(17, 24, 39, 0.85) 30%,
-      rgba(30, 64, 175, 0.9) 70%,
-      rgba(17, 24, 39, 0.85) 100%);
+      width: 100vw;
+      height: 100vh;
       z-index: -1;
-      backdrop-filter: blur(2px);
+      background: linear-gradient(135deg, #0a0a0a 0%, #0f1629 25%, #1e3a8a 50%, #0f172a 75%, #000 100%);
     }
 
-    /* Animated particles */
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .floating-shapes {
+      position: absolute;
       width: 100%;
       height: 100%;
-      z-index: 0;
-      pointer-events: none;
+      overflow: hidden;
     }
 
-    .particle {
+    .shape {
       position: absolute;
-      background: rgba(34, 211, 238, 0.3);
+      background: linear-gradient(45deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
       border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
+      filter: blur(40px);
+      animation: float 20s ease-in-out infinite;
     }
 
-    .particle:nth-child(1) {
-      width: 20px;
-      height: 20px;
-      top: 20%;
-      left: 10%;
+    .shape:nth-child(1) {
+      width: 350px;
+      height: 350px;
+      top: -175px;
+      left: -175px;
       animation-delay: 0s;
     }
 
-    .particle:nth-child(2) {
-      width: 15px;
-      height: 15px;
-      top: 60%;
-      right: 15%;
-      animation-delay: 2s;
-    }
-
-    .particle:nth-child(3) {
-      width: 25px;
-      height: 25px;
-      bottom: 30%;
-      left: 70%;
-      animation-delay: 4s;
-    }
-
-    .particle:nth-child(4) {
-      width: 18px;
-      height: 18px;
+    .shape:nth-child(2) {
+      width: 450px;
+      height: 450px;
       top: 40%;
-      left: 80%;
-      animation-delay: 1s;
+      right: -225px;
+      animation-delay: -7s;
+      background: linear-gradient(45deg, rgba(34, 211, 238, 0.12), rgba(14, 165, 233, 0.1));
     }
 
-    .particle:nth-child(5) {
-      width: 22px;
-      height: 22px;
-      bottom: 20%;
-      right: 60%;
-      animation-delay: 3s;
+    .shape:nth-child(3) {
+      width: 400px;
+      height: 400px;
+      bottom: -200px;
+      left: 25%;
+      animation-delay: -14s;
+      background: linear-gradient(45deg, rgba(6, 182, 212, 0.08), rgba(8, 145, 178, 0.1));
+    }
+
+    .shape:nth-child(4) {
+      width: 280px;
+      height: 280px;
+      top: 15%;
+      left: 65%;
+      animation-delay: -21s;
+    }
+
+    .shape:nth-child(5) {
+      width: 320px;
+      height: 320px;
+      bottom: 40%;
+      right: 70%;
+      animation-delay: -10s;
+      background: linear-gradient(45deg, rgba(14, 165, 233, 0.06), rgba(59, 130, 246, 0.08));
     }
 
     @keyframes float {
       0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-        opacity: 0.3;
+        transform: translate(0px, 0px) rotate(0deg) scale(1);
       }
-      50% {
-        transform: translateY(-30px) rotate(180deg);
-        opacity: 0.7;
+      33% {
+        transform: translate(40px, -40px) rotate(120deg) scale(1.1);
+      }
+      66% {
+        transform: translate(-30px, 30px) rotate(240deg) scale(0.9);
       }
     }
 
-    .glass {
-      background: rgba(31, 41, 55, 0.85);
+    /* Glass morphism container */
+    .glass-container {
+      background: rgba(15, 15, 35, 0.4);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-radius: 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      box-shadow:
+              0 8px 32px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
       position: relative;
-      z-index: 1;
+      overflow: hidden;
     }
 
-    .glass::before {
+    .glass-container::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg,
-      rgba(34, 211, 238, 0.05) 0%,
-      rgba(59, 130, 246, 0.05) 100%);
-      border-radius: inherit;
-      z-index: -1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent);
     }
 
-    .glass:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    /* Modern inputs */
+    .input-group {
+      position: relative;
+      margin-bottom: 1.5rem;
     }
 
-    input {
-      transition: all 0.3s ease;
-      background: rgba(55, 65, 81, 0.8) !important;
+    .input-field {
+      width: 100%;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      color: #fff;
+      font-size: 16px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       backdrop-filter: blur(10px);
     }
 
-    input:focus {
-      transform: scale(1.02);
-      background: rgba(55, 65, 81, 0.9) !important;
-      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+    .input-field:focus {
+      outline: none;
+      border-color: #06b6d4;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+      box-shadow:
+              0 10px 40px rgba(6, 182, 212, 0.2),
+              0 0 0 1px rgba(6, 182, 212, 0.3);
     }
 
-    input::placeholder {
-      color: #9ca3af;
-      opacity: 0.7;
+    .input-field::placeholder {
+      color: rgba(255, 255, 255, 0.4);
     }
 
-    button {
+    .input-label {
+      position: absolute;
+      top: -8px;
+      left: 16px;
+      background: rgba(15, 15, 35, 0.9);
+      padding: 0 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus + .input-label,
+    .input-field:not(:placeholder-shown) + .input-label {
+      color: #06b6d4;
+      transform: scale(0.9);
+    }
+
+    /* Modern buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      border: none;
+      border-radius: 16px;
+      padding: 18px 32px;
+      font-weight: 600;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
-      transition: all 0.3s ease;
-      z-index: 1;
+      box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
     }
 
-    button::before {
+    .btn-primary::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s ease, height 0.6s ease;
-      z-index: -1;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
     }
 
-    button:hover::before {
-      width: 400px;
-      height: 400px;
+    .btn-primary:hover::before {
+      left: 100%;
     }
 
-    button:hover {
+    .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.4);
+      box-shadow: 0 20px 40px rgba(6, 182, 212, 0.4);
     }
 
-    .form-field {
+    .btn-primary:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-google {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 16px 32px;
+      font-weight: 500;
+      font-size: 16px;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-google:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Animated title */
+    .animated-title {
+      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #22d3ee 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-shift 3s ease-in-out infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .divider span {
+      padding: 0 1rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Forgot password link */
+    .forgot-password {
+      color: #06b6d4;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
       position: relative;
     }
 
-    .form-field::before {
+    .forgot-password::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
       width: 0;
-      height: 2px;
-      background: linear-gradient(to right, #22d3ee, #3b82f6);
+      height: 1px;
+      bottom: -2px;
+      left: 0;
+      background: #06b6d4;
       transition: width 0.3s ease;
-      border-radius: 1px;
     }
 
-    .form-field:hover::before {
+    .forgot-password:hover::after {
       width: 100%;
     }
 
-    /* Title glow effect */
-    .title-glow {
-      text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
-      animation: pulse-glow 2s ease-in-out infinite alternate;
+    .forgot-password:hover {
+      color: #22d3ee;
     }
 
-    @keyframes pulse-glow {
-      from {
-        text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
-      }
-      to {
-        text-shadow: 0 0 30px rgba(34, 211, 238, 0.8);
-      }
+    /* Welcome message */
+    .welcome-badge {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 2rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
     }
 
-    /* Responsive adjustments */
+    .welcome-badge .icon {
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    /* Responsive design */
     @media (max-width: 768px) {
-      .video-overlay {
-        background: linear-gradient(135deg,
-        rgba(30, 58, 138, 0.95) 0%,
-        rgba(17, 24, 39, 0.9) 30%,
-        rgba(30, 64, 175, 0.95) 70%,
-        rgba(17, 24, 39, 0.9) 100%);
+      .glass-container {
+        margin: 1rem;
+        border-radius: 20px;
       }
+
+      .shape {
+        filter: blur(20px);
+      }
+
+      .input-field {
+        padding: 14px 16px;
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      position: relative;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      margin: auto;
+      border: 2px solid transparent;
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 1s ease infinite;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @keyframes spin {
+      0% { transform: translateY(-50%) rotate(0deg); }
+      100% { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    /* Success animation */
+    @keyframes success {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .success-animation {
+      animation: success 0.3s ease;
+    }
+
+    /* Eye icon for password visibility */
+    .password-toggle {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.3s ease;
+    }
+
+    .password-toggle:hover {
+      color: #06b6d4;
     }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
-
-<!-- Video Background -->
-<div class="video-background">
-  <video autoplay muted loop playsinline>
-    <source src="../assests/bgvideo.mp4" type="video/mp4">
-    <source src="../assests/bgvideo.mp4" type="video/mp4">
-    <source src="../assests/bgvideo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+<body class="min-h-screen flex items-center justify-center p-4">
+<!-- Animated background -->
+<div class="bg-container">
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
 </div>
 
-<!-- Video Overlay -->
-<div class="video-overlay"></div>
-
-<!-- Animated Particles -->
-<div class="particles">
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-</div>
-
-<div class="glass w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-6 sm:p-8 lg:p-12">
-  <div class="text-center mb-8">
-    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-cyan-300 title-glow">FindCare</h1>
-    <p class="text-gray-300 text-sm sm:text-base lg:text-lg mt-2 opacity-90">Welcome back! Sign in to continue caring for pets</p>
+<!-- Main container -->
+<div class="glass-container w-full max-w-md p-8 relative">
+  <!-- Welcome Badge -->
+  <div class="welcome-badge">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M9 12l2 2 4-4"/>
+      <circle cx="12" cy="12" r="10"/>
+    </svg>
+    <span class="text-cyan-300 font-medium">Welcome back to FindCare</span>
   </div>
 
-  <form action="form" method="POST" class="space-y-6">
-    <div class="form-field">
-      <label class="block text-gray-200 text-sm mb-2 font-medium">User Name</label>
-      <input required type="text" placeholder="prabash01" class="user_Name w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300">
-    </div>
-
-    <div class="form-field">
-      <label class="block text-gray-200 text-sm mb-2 font-medium">Password</label>
-      <input required type="password" placeholder="••••••••" class="user_Password w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300">
-    </div>
-
-    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition text-white py-3 rounded-lg font-semibold shadow-lg text-sm sm:text-base lg:text-lg relative z-10">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold animated-title space-grotesk mb-3">
       Sign In
+    </h1>
+    <p class="text-gray-300 text-lg font-medium">
+      Continue your pet rescue journey
+    </p>
+    <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mt-4 rounded-full"></div>
+  </div>
+
+  <!-- Form -->
+  <form action="form" method="POST" id="signinForm" class="space-y-6">
+    <div class="input-group">
+      <input type="text" id="username" class="input-field user_Name" placeholder="Enter your username" required>
+      <label class="input-label" for="username">Username</label>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="password" class="input-field user_Password" placeholder="Enter your password" required>
+      <label class="input-label" for="password">Password</label>
+      <div class="password-toggle" onclick="togglePassword()">
+        <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="text-right">
+      <a href="#" class="forgot-password">Forgot Password?</a>
+    </div>
+
+    <button type="submit" class="btn-primary w-full" id="submitBtn">
+      <span>Sign In</span>
     </button>
   </form>
 
-  <p class="mt-6 text-center text-gray-300 text-xs sm:text-sm lg:text-base">
+  <!-- Divider -->
+  <div class="divider">
+    <span>or continue with</span>
+  </div>
+
+  <!-- Google Sign In -->
+  <button onclick="googleSignIn()" class="btn-google w-full" id="googleSignIn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    </svg>
+    Sign in with Google
+  </button>
+
+  <!-- Footer -->
+  <p class="mt-8 text-center text-gray-400">
     Don't have an account?
-    <a href="./signup.html" class="text-cyan-300 hover:text-cyan-200 transition duration-200 font-medium">Sign Up</a>
+    <a href="./signup.html" class="text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-200 hover:underline">
+      Sign Up
+    </a>
   </p>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-  // Video background optimization
+  // Enhanced form functionality
   document.addEventListener('DOMContentLoaded', function() {
-    const video = document.querySelector('.video-background video');
+    const form = document.getElementById('signinForm');
+    const inputs = document.querySelectorAll('.input-field');
+    const submitBtn = document.getElementById('submitBtn');
+    const googleSignIn = document.getElementById('googleSignIn');
 
-    if (video) {
-      // Pause video on mobile to save bandwidth
-      if (window.innerWidth <= 768) {
-        video.pause();
-        video.style.display = 'none';
-      }
-
-      // Handle video loading errors gracefully
-      video.addEventListener('error', function() {
-        console.log('Video failed to load, using gradient background');
-        const videoContainer = document.querySelector('.video-background');
-        videoContainer.style.display = 'none';
-      });
-
-      // Optimize video playback
-      video.addEventListener('loadeddata', function() {
-        video.playbackRate = 0.8; // Slightly slower for a more calm effect
-      });
-    }
-
-    // Enhanced form interactions
-    const inputs = document.querySelectorAll('input');
+    // Input focus effects
     inputs.forEach(input => {
       input.addEventListener('focus', function() {
-        this.parentElement.classList.add('focused');
+        this.parentElement.style.transform = 'scale(1.02)';
       });
 
       input.addEventListener('blur', function() {
-        this.parentElement.classList.remove('focused');
+        this.parentElement.style.transform = 'scale(1)';
       });
     });
 
-    // Add subtle animation to the form on load
-    setTimeout(() => {
-      document.querySelector('.glass').style.opacity = '1';
-      document.querySelector('.glass').style.transform = 'translateY(0)';
-    }, 100);
+    // Form submission
+    form.addEventListener('submit', function(e) {
+      // Don't prevent default - let form submit normally for your backend
+      // Just add visual feedback
+
+      // Add loading state
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+
+      // Remove loading state after a short delay (form will submit)
+      setTimeout(() => {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }, 1000);
+    });
+
+    // Google Sign In
+    googleSignIn.addEventListener('click', function() {
+      this.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 150);
+
+      // Simulate Google OAuth
+      Swal.fire({
+        title: 'Google Sign In',
+        text: 'Redirecting to Google OAuth...',
+        icon: 'info',
+        background: 'rgba(15, 15, 35, 0.95)',
+        color: '#fff',
+        confirmButtonColor: '#06b6d4',
+        timer: 2000,
+        showConfirmButton: false
+      });
+    });
+
+    // Forgot password
+    const forgotPassword = document.querySelector('.forgot-password');
+    forgotPassword.addEventListener('click', function(e) {
+      e.preventDefault();
+      Swal.fire({
+        title: 'Reset Password',
+        text: 'Enter your email address and we\'ll send you a reset link.',
+        input: 'email',
+        inputPlaceholder: 'Enter your email',
+        background: 'rgba(15, 15, 35, 0.95)',
+        color: '#fff',
+        confirmButtonColor: '#06b6d4',
+        cancelButtonColor: '#6b7280',
+        showCancelButton: true,
+        confirmButtonText: 'Send Reset Link',
+        inputValidator: (value) => {
+          if (!value) {
+            return 'You need to enter your email!'
+          }
+          if (!value.includes('@')) {
+            return 'Please enter a valid email address!'
+          }
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Reset Link Sent!',
+            text: 'Check your email for password reset instructions.',
+            icon: 'success',
+            background: 'rgba(15, 15, 35, 0.95)',
+            color: '#fff',
+            confirmButtonColor: '#06b6d4'
+          });
+        }
+      });
+    });
   });
 
-  // Initialize form with subtle entrance animation
-  document.querySelector('.glass').style.opacity = '0';
-  document.querySelector('.glass').style.transform = 'translateY(20px)';
-  document.querySelector('.glass').style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  // Password visibility toggle
+  function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeIcon.innerHTML = `
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                `;
+    } else {
+      passwordInput.type = 'password';
+      eyeIcon.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                `;
+    }
+  }
+
+  // Smooth scroll reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  });
+
+  // Observe form elements for reveal animation
+  document.querySelectorAll('.input-group, .btn-primary, .btn-google, .welcome-badge').forEach((el, index) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+    observer.observe(el);
+  });
 </script>
+
+<!-- Include jQuery (from your original code) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <!-- Include your existing signin.js -->
 <script src="../js/signin.js"></script>

@@ -3,481 +3,563 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FindCare - Sign Up</title>
+    <title>FindCare - Join the Revolution</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
+            background: #000;
+            overflow-x: hidden;
         }
 
-        /* Video Background Styles */
-        .video-background {
+        .space-grotesk {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Animated Background */
+        .bg-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .video-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg,
-            rgba(30, 58, 138, 0.9) 0%,
-            rgba(17, 24, 39, 0.85) 30%,
-            rgba(30, 64, 175, 0.9) 70%,
-            rgba(17, 24, 39, 0.85) 100%);
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
-            backdrop-filter: blur(2px);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #000 100%);
         }
 
-        /* Animated particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .floating-shapes {
+            position: absolute;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            pointer-events: none;
+            overflow: hidden;
         }
 
-        .particle {
+        .shape {
             position: absolute;
-            background: rgba(236, 72, 153, 0.3);
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
             border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+            filter: blur(40px);
+            animation: float 20s ease-in-out infinite;
         }
 
-        .particle:nth-child(1) {
-            width: 20px;
-            height: 20px;
-            top: 15%;
-            left: 15%;
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
             animation-delay: 0s;
         }
 
-        .particle:nth-child(2) {
-            width: 15px;
-            height: 15px;
-            top: 70%;
-            right: 10%;
-            animation-delay: 2s;
+        .shape:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            right: -200px;
+            animation-delay: -5s;
+            background: linear-gradient(45deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1));
         }
 
-        .particle:nth-child(3) {
-            width: 25px;
-            height: 25px;
-            bottom: 25%;
-            left: 75%;
-            animation-delay: 4s;
+        .shape:nth-child(3) {
+            width: 350px;
+            height: 350px;
+            bottom: -175px;
+            left: 30%;
+            animation-delay: -10s;
+            background: linear-gradient(45deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
         }
 
-        .particle:nth-child(4) {
-            width: 18px;
-            height: 18px;
-            top: 45%;
-            left: 85%;
-            animation-delay: 1s;
-        }
-
-        .particle:nth-child(5) {
-            width: 22px;
-            height: 22px;
-            bottom: 15%;
-            right: 65%;
-            animation-delay: 3s;
-        }
-
-        .particle:nth-child(6) {
-            width: 16px;
-            height: 16px;
-            top: 25%;
-            right: 25%;
-            animation-delay: 5s;
+        .shape:nth-child(4) {
+            width: 250px;
+            height: 250px;
+            top: 20%;
+            left: 60%;
+            animation-delay: -15s;
         }
 
         @keyframes float {
             0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0.3;
+                transform: translate(0px, 0px) rotate(0deg) scale(1);
             }
-            50% {
-                transform: translateY(-35px) rotate(180deg);
-                opacity: 0.7;
+            33% {
+                transform: translate(30px, -30px) rotate(120deg) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg) scale(0.9);
             }
         }
 
-        .glass {
-            background: rgba(31, 41, 55, 0.85);
+        /* Glass morphism container */
+        .glass-container {
+            background: rgba(15, 15, 35, 0.4);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow:
+                    0 8px 32px rgba(0, 0, 0, 0.3),
+                    0 0 0 1px rgba(255, 255, 255, 0.05),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
-            z-index: 1;
-            max-height: 95vh;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
-        .glass::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .glass::-webkit-scrollbar-track {
-            background: rgba(55, 65, 81, 0.3);
-            border-radius: 10px;
-        }
-
-        .glass::-webkit-scrollbar-thumb {
-            background: rgba(236, 72, 153, 0.5);
-            border-radius: 10px;
-        }
-
-        .glass::before {
+        .glass-container::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg,
-            rgba(236, 72, 153, 0.05) 0%,
-            rgba(59, 130, 246, 0.05) 100%);
-            border-radius: inherit;
-            z-index: -1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.5), transparent);
         }
 
-        .glass:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        input {
-            transition: all 0.3s ease;
-            background: rgba(55, 65, 81, 0.8) !important;
-            backdrop-filter: blur(10px);
-        }
-
-        input:focus {
-            transform: scale(1.02);
-            background: rgba(55, 65, 81, 0.9) !important;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
-        }
-
-        input::placeholder {
-            color: #9ca3af;
-            opacity: 0.7;
-        }
-
-        button {
+        /* Modern inputs */
+        .input-group {
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            z-index: 1;
+            margin-bottom: 1.5rem;
         }
 
-        button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-            z-index: -1;
-        }
-
-        button:hover::before {
-            width: 400px;
-            height: 400px;
-        }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
-        }
-
-        .form-field {
-            position: relative;
-        }
-
-        .form-field::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(to right, #ec4899, #3b82f6);
-            transition: width 0.3s ease;
-            border-radius: 1px;
-        }
-
-        .form-field:hover::before {
+        .input-field {
             width: 100%;
-        }
-
-        /* Title glow effect */
-        .title-glow {
-            text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-            animation: pulse-glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse-glow {
-            from {
-                text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-            }
-            to {
-                text-shadow: 0 0 30px rgba(236, 72, 153, 0.8);
-            }
-        }
-
-        /* Error message styling */
-        .error-message {
-            background: rgba(220, 38, 127, 0.1);
-            border: 1px solid rgba(220, 38, 127, 0.3);
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-            margin-top: 0.5rem;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .video-overlay {
-                background: linear-gradient(135deg,
-                rgba(30, 58, 138, 0.95) 0%,
-                rgba(17, 24, 39, 0.9) 30%,
-                rgba(30, 64, 175, 0.95) 70%,
-                rgba(17, 24, 39, 0.9) 100%);
-            }
-
-            .glass {
-                max-height: 98vh;
-            }
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            box-shadow:
+                    0 10px 40px rgba(102, 126, 234, 0.2),
+                    0 0 0 1px rgba(102, 126, 234, 0.3);
         }
 
-        /* Enhanced focus states */
-        .focused::before {
-            width: 100% !important;
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .input-label {
+            position: absolute;
+            top: -8px;
+            left: 16px;
+            background: rgba(15, 15, 35, 0.9);
+            padding: 0 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus + .input-label,
+        .input-field:not(:placeholder-shown) + .input-label {
+            color: #667eea;
+            transform: scale(0.9);
         }
 
         /* Password strength indicator */
         .password-strength {
-            height: 4px;
-            background: rgba(55, 65, 81, 0.5);
-            border-radius: 2px;
-            margin-top: 0.5rem;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 8px;
             overflow: hidden;
         }
 
-        .password-strength-bar {
+        .strength-bar {
             height: 100%;
-            transition: width 0.3s ease, background-color 0.3s ease;
-            border-radius: 2px;
+            border-radius: 3px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #059669);
         }
 
-        .strength-weak { background: #ef4444; width: 25%; }
-        .strength-fair { background: #f59e0b; width: 50%; }
-        .strength-good { background: #10b981; width: 75%; }
-        .strength-strong { background: #059669; width: 100%; }
+        /* Modern buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 16px;
+            padding: 18px 32px;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-google {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 16px 32px;
+            font-weight: 500;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-google:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animated title */
+        .animated-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease-in-out infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .glass-container {
+                margin: 1rem;
+                border-radius: 20px;
+            }
+
+            .shape {
+                filter: blur(20px);
+            }
+
+            .input-field {
+                padding: 14px 16px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            position: relative;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s ease infinite;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        /* Success animation */
+        @keyframes success {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-animation {
+            animation: success 0.3s ease;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
-
-<!-- Video Background -->
-<div class="video-background">
-    <video autoplay muted loop playsinline>
-        <source src="../assests/bgvideo.mp4" type="video/mp4">
-        <source src="../assests/bgvideo.mp4" type="video/mp4">
-        <source src="../assests/bgvideo.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+<body class="min-h-screen flex items-center justify-center p-4">
+<!-- Animated background -->
+<div class="bg-container">
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 </div>
 
-<!-- Video Overlay -->
-<div class="video-overlay"></div>
-
-<!-- Animated Particles -->
-<div class="particles">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-</div>
-
-<div class="glass w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-6 sm:p-8 lg:p-12">
+<!-- Main container -->
+<div class="glass-container w-full max-w-lg p-8 relative">
+    <!-- Header -->
     <div class="text-center mb-8">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-pink-400 title-glow flex items-center justify-center">
-            <span class="mr-3"></span> FindCare
+        <h1 class="text-4xl font-bold animated-title space-grotesk mb-3">
+            FindCare
         </h1>
-        <p class="text-gray-300 text-sm sm:text-base lg:text-lg mt-2 opacity-90">Join the community & help pets find their way home</p>
+        <p class="text-gray-300 text-lg font-medium">
+            Join the pet rescue revolution
+        </p>
+        <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-4 rounded-full"></div>
     </div>
 
-    <form action="form" method="POST" class="space-y-4 sm:space-y-5">
-        <div class="form-field">
-            <label class="block text-gray-200 text-sm mb-2 font-medium">Full Name</label>
-            <input type="text" required placeholder="John Doe" class="full_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 transition duration-300">
+    <!-- Form -->
+    <form action="form" method="POST" id="signupForm" class="space-y-6">
+        <div class="input-group">
+            <input type="text" id="fullName" name="full_Name" class="input-field full_Name" placeholder="Enter your full name" required>
+            <label class="input-label" for="fullName">Full Name</label>
         </div>
 
-        <div class="form-field">
-            <label class="block text-gray-200 text-sm mb-2 font-medium">User Name</label>
-            <input type="text" required placeholder="johndoe01" name="user_Name" class="user_Name w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 transition duration-300">
-            <p class="username-error text-red-400 text-sm mt-1 hidden error-message">Username already exists, try another.</p>
+        <div class="input-group">
+            <input type="text" id="username" name="user_Name" class="input-field user_Name" placeholder="Choose a username" required>
+            <label class="input-label" for="username">Username</label>
+            <div class="username-error hidden mt-2 text-red-400 text-sm bg-red-500/10 p-2 rounded-lg border border-red-500/20">
+                Username already exists, please try another.
+            </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="form-field">
-                <label class="block text-gray-200 text-sm mb-2 font-medium">Password</label>
-                <input type="password" required placeholder="••••••••" name="user_Password" class="user_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 transition duration-300" id="password">
+            <div class="input-group">
+                <input type="password" id="password" name="user_Password" class="input-field user_Password" placeholder="Create a password" required>
+                <label class="input-label" for="password">Password</label>
                 <div class="password-strength">
-                    <div class="password-strength-bar" id="strengthBar"></div>
+                    <div class="strength-bar" id="strengthBar" style="width: 0%"></div>
                 </div>
-                <p class="password-error text-red-400 text-sm mt-1 hidden error-message">Password must be at least 6 characters long.</p>
+                <div class="password-error hidden mt-2 text-red-400 text-sm bg-red-500/10 p-2 rounded-lg border border-red-500/20">
+                    Password must be at least 6 characters long.
+                </div>
             </div>
 
-            <div class="form-field">
-                <label class="block text-gray-200 text-sm mb-2 font-medium">Confirm Password</label>
-                <input type="password" required placeholder="••••••••" name="confirm_Password" class="confirm_Password w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-gray-600 bg-gray-800/70 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 transition duration-300" id="confirmPassword">
-                <p class="confirm-error text-red-400 text-sm mt-1 hidden error-message">Passwords do not match.</p>
+            <div class="input-group">
+                <input type="password" id="confirmPassword" name="confirm_Password" class="input-field confirm_Password" placeholder="Confirm password" required>
+                <label class="input-label" for="confirmPassword">Confirm Password</label>
+                <div class="confirm-error hidden mt-2 text-red-400 text-sm bg-red-500/10 p-2 rounded-lg border border-red-500/20">
+                    Passwords do not match.
+                </div>
             </div>
         </div>
 
-        <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transition text-white py-2 sm:py-3 rounded-xl font-semibold shadow-lg text-sm sm:text-base lg:text-lg relative z-10">
-            Create Account
+        <button type="submit" class="btn-primary w-full" id="submitBtn">
+            <span>Create Account</span>
         </button>
     </form>
 
-    <p class="mt-6 text-center text-gray-300 text-xs sm:text-sm lg:text-base">
+    <!-- Divider -->
+    <div class="divider">
+        <span>or continue with</span>
+    </div>
+
+    <!-- Google Sign In -->
+    <button onclick="googleSignUp()" class="btn-google w-full" id="googleSignIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Sign up with Google
+    </button>
+
+    <!-- Footer -->
+    <p class="mt-8 text-center text-gray-400">
         Already have an account?
-        <a href="./signin.html" class="text-pink-400 hover:text-pink-300 transition duration-200 font-medium">Sign In</a>
+        <a href="./signin.html" class="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-200 hover:underline">
+            Sign In
+        </a>
     </p>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-    // Video background optimization
+    // Enhanced form functionality
     document.addEventListener('DOMContentLoaded', function() {
-        const video = document.querySelector('.video-background video');
+        const form = document.getElementById('signupForm');
+        const inputs = document.querySelectorAll('.input-field');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const submitBtn = document.getElementById('submitBtn');
+        const googleSignIn = document.getElementById('googleSignIn');
 
-        if (video) {
-            // Pause video on mobile to save bandwidth
-            if (window.innerWidth <= 768) {
-                video.pause();
-                video.style.display = 'none';
-            }
-
-            // Handle video loading errors gracefully
-            video.addEventListener('error', function() {
-                console.log('Video failed to load, using gradient background');
-                const videoContainer = document.querySelector('.video-background');
-                videoContainer.style.display = 'none';
-            });
-
-            // Optimize video playback
-            video.addEventListener('loadeddata', function() {
-                video.playbackRate = 0.8; // Slightly slower for a more calm effect
-            });
-        }
-
-        // Enhanced form interactions
-        const inputs = document.querySelectorAll('input');
+        // Input focus effects
         inputs.forEach(input => {
             input.addEventListener('focus', function() {
-                this.parentElement.classList.add('focused');
+                this.parentElement.style.transform = 'scale(1.02)';
             });
 
             input.addEventListener('blur', function() {
-                this.parentElement.classList.remove('focused');
+                this.parentElement.style.transform = 'scale(1)';
             });
         });
 
         // Password strength checker
-        const passwordInput = document.getElementById('password');
-        const strengthBar = document.getElementById('strengthBar');
-
         passwordInput.addEventListener('input', function() {
-            const password = this.value;
-            const strength = calculatePasswordStrength(password);
-            updateStrengthBar(strength);
+            const strength = calculatePasswordStrength(this.value);
+            updateStrengthIndicator(strength);
         });
 
-        // Password confirmation checker
-        const confirmPasswordInput = document.getElementById('confirmPassword');
-        const confirmError = document.querySelector('.confirm-error');
-
+        // Password confirmation
         function checkPasswordMatch() {
+            const confirmError = document.querySelector('.confirm-error');
             if (confirmPasswordInput.value && passwordInput.value !== confirmPasswordInput.value) {
                 confirmError.classList.remove('hidden');
+                confirmPasswordInput.style.borderColor = '#ef4444';
             } else {
                 confirmError.classList.add('hidden');
+                confirmPasswordInput.style.borderColor = 'rgba(255, 255, 255, 0.1)';
             }
         }
 
         confirmPasswordInput.addEventListener('input', checkPasswordMatch);
         passwordInput.addEventListener('input', checkPasswordMatch);
 
-        // Add subtle animation to the form on load
-        setTimeout(() => {
-            document.querySelector('.glass').style.opacity = '1';
-            document.querySelector('.glass').style.transform = 'translateY(0)';
-        }, 100);
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            // Don't prevent default - let form submit normally for your backend
+            // Just add visual feedback
+
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+
+            // Remove loading state after a short delay (form will submit)
+            setTimeout(() => {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }, 1000);
+        });
+
+        // Google Sign In
+        googleSignIn.addEventListener('click', function() {
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+
+            // Simulate Google OAuth
+            Swal.fire({
+                title: 'Google Sign In',
+                text: 'Redirecting to Google OAuth...',
+                icon: 'info',
+                background: 'rgba(15, 15, 35, 0.95)',
+                color: '#fff',
+                confirmButtonColor: '#667eea',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        });
     });
 
     // Password strength calculation
     function calculatePasswordStrength(password) {
         let strength = 0;
-        if (password.length >= 6) strength += 1;
-        if (password.length >= 10) strength += 1;
-        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength += 1;
-        if (/\d/.test(password)) strength += 1;
-        if (/[^a-zA-Z\d]/.test(password)) strength += 1;
-        return Math.min(strength, 4);
+        if (password.length >= 6) strength += 25;
+        if (password.length >= 10) strength += 25;
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength += 25;
+        if (/\d/.test(password)) strength += 15;
+        if (/[^a-zA-Z\d]/.test(password)) strength += 10;
+        return Math.min(strength, 100);
     }
 
-    function updateStrengthBar(strength) {
+    function updateStrengthIndicator(strength) {
         const strengthBar = document.getElementById('strengthBar');
-        const classes = ['strength-weak', 'strength-fair', 'strength-good', 'strength-strong'];
+        strengthBar.style.width = strength + '%';
 
-        // Remove all strength classes
-        classes.forEach(cls => strengthBar.classList.remove(cls));
-
-        // Add appropriate strength class
-        if (strength > 0) {
-            strengthBar.classList.add(classes[Math.min(strength - 1, 3)]);
+        if (strength < 25) {
+            strengthBar.style.background = '#ef4444';
+        } else if (strength < 50) {
+            strengthBar.style.background = '#f59e0b';
+        } else if (strength < 75) {
+            strengthBar.style.background = '#10b981';
         } else {
-            strengthBar.style.width = '0%';
+            strengthBar.style.background = 'linear-gradient(90deg, #10b981, #059669)';
         }
     }
 
-    // Initialize form with subtle entrance animation
-    document.querySelector('.glass').style.opacity = '0';
-    document.querySelector('.glass').style.transform = 'translateY(20px)';
-    document.querySelector('.glass').style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    // Smooth scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    });
+
+    // Observe form elements for reveal animation
+    document.querySelectorAll('.input-group, .btn-primary, .btn-google').forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(el);
+    });
 </script>
+
+<!-- Include jQuery (from your original code) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <!-- Include your existing signup.js -->
 <script src="../js/signup.js"></script>

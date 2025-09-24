@@ -35,3 +35,7 @@ $("form").on("submit" , (e) => {
     })
 });
 
+
+function googleSignIn() {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+}
