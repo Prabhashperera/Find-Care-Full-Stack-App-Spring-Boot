@@ -28,10 +28,6 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         // Generate JWT
         String token = jwtUtil.generateToken(email, 60 * 60 * 24 * 7);
 
-//        // Return token as JSON (you could also redirect with token in query params)
-//        response.setContentType("application/json");
-//        response.getWriter().write("{\"token\": \"" + token + "\"}");
-//        response.getWriter().flush();
         response.sendRedirect("http://localhost:5500/pages/homePage.html?token=" + token);
     }
 }
